@@ -26,8 +26,8 @@ Bài tập lớn java nhóm 5: Phòng, Hường, Dương, Đông, Phương. Sử
 - git checkout feature
 - git rebase develop (rebase với nhánh develop để đồng nhất code mới nhất)
 Nếu xảy conflict thì vào xem lại code bị conflict, sửa code, sau đó thực  hiện 2 lệnh sau (Nếu k bị conflict thì bỏ qua):
-- git add 
-- git rebase –continue
+	+ git add 
+	+ git rebase –continue
 Sau khi xử lý xong conflict:  
 - git push origin feature 
 - Tạo pull request trên remote gitlab
