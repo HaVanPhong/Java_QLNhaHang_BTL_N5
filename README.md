@@ -19,14 +19,14 @@ Bài tập lớn java nhóm 5: Phòng, Hường, Dương, Đông, Phương. Sử
 ## Các câu lệnh tương ứng:
 - git clone
 - git checkout -b feature
-- git add *
+- git add .
 - git commit -m “fix api get all user”
 - git checkout develop
 - git pull origin develop
 - git checkout feature
 - git rebase develop (rebase với nhánh develop để đồng nhất code mới nhất)
 Nếu xảy conflict thì vào xem lại code bị conflict, sửa code, sau đó thực  hiện 2 lệnh sau (Nếu k bị conflict thì bỏ qua):
-	+ git add 
+	+ git add .
 	+ git rebase –continue
 Sau khi xử lý xong conflict:  
 - git push origin feature 
