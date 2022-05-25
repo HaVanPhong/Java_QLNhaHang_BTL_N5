@@ -7,6 +7,8 @@ Bài tập lớn java nhóm 5: Phòng, Hường, Dương, Đông, Phương. Sử
 - Xem tổng <a href="https://drive.google.com/drive/folders/1bl7tHfw05fzWNC1hJT0v4-o7NaHtrxLT?usp=sharing">tại đây<a/>
 # JDK 8
 - Tải <a href="https://drive.google.com/drive/folders/1_cDOMcMuY1kJFKepoISo5mPRXuyASlX3?usp=sharing">tại đây</a>
+# Netbean 8.2
+- Tải <a href="https://drive.google.com/file/d/184Uq9aInvIFZZ5MpntGoDLnTFCvqejyb/view?usp=sharing">Tại đây</a>
 # Quy trình sử dụng git
 ## Tóm tắt quy trình:
 - Clone code về repository ở máy local
