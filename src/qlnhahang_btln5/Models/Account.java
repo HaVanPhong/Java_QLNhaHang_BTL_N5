@@ -9,18 +9,26 @@ package qlnhahang_btln5.Models;
  *
  * @author HaPhong
  */
-public class Account {
+public class Account{
     private int idUser;
     private String username;
     private String password;
     private String role;
-    public Account(int idUser, String username, String password, String role) {
+    private int idEmp;
+    public Account(int idUser, String username, String password,String role, int idEmp) {
         this.idUser = idUser;
         this.username = username;
         this.password = password;
         this.role = role;
+        this.idEmp = idEmp;
     }
 
+    public int getIdEmp() {
+        return idEmp;
+    }
+    public Account(String username) {
+        this.username = username;
+    }
     public Account() {
     }
 
@@ -56,7 +64,6 @@ public class Account {
         this.role = role;
     }
 
-    
-    
-    
+
+
 }

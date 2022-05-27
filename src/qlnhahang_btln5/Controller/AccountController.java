@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static qlnhahang_btln5.Controller.SQLProcessing.statement;
 import qlnhahang_btln5.Models.Account;
 
@@ -31,7 +33,8 @@ public class AccountController {
                            resultSet.getInt(1),
                            resultSet.getString(2),
                            resultSet.getString(3),
-                           resultSet.getString(4)
+                           resultSet.getString(4),
+                           resultSet.getInt(5)
                    );
 
                    accounts.add(acc);
@@ -40,5 +43,34 @@ public class AccountController {
                System.out.println("Error get all account: "+ e.getMessage());
            }
            return accounts;
+    }
+    public static Account CheckLogin(String username,String password){
+        Account cus = null;
+        String sql = "select * from Account where username = '"+username+"' and password = '"+password+"'";
+        try {
+               ResultSet resultSet = statement.executeQuery(sql);
+               if(resultSet.next()){
+                   cus = new Account(
+                           resultSet.getInt(1),
+                           resultSet.getString(2),
+                           resultSet.getString(3),
+                           resultSet.getString(4),
+                           resultSet.getInt(5)
+                   );
+               }
+           } catch (SQLException e) {
+               System.out.println(e);
+           }
+        return cus;
+    }
+    public static boolean CreateAccount(String username,String password,String role,int idEmp){
+        String sql  = "insert into Account values('"+username+"','"+password+"','"+role+"','"+idEmp+"')";
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+            return true;  
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 }

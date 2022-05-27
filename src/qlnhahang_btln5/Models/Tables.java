@@ -9,16 +9,15 @@ package qlnhahang_btln5.Models;
  *
  * @author HaPhong
  */
-public class Table {
+public class Tables {
     private int idTB;
     private int tbNumber;
-
-    public Table(int idTB, int tbNumber) {
+    public Tables(int idTB, int tbNumber) {
         this.idTB = idTB;
         this.tbNumber = tbNumber;
     }
 
-    public Table() {
+    public Tables() {
     }
 
     public int getIdTB() {
@@ -39,3 +38,4 @@ public class Table {
     
     
 }
+
