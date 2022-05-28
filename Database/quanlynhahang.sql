@@ -48,7 +48,8 @@ CREATE TABLE Material (
 )
 CREATE TABLE Tables (
   idTB INT IDENTITY(1,1) PRIMARY KEY,
-  tbNumber INT NOT NULL
+  tbNumber INT NOT NULL,
+  note nvarchar(255)
 ) 
 
 CREATE TABLE Expense (
@@ -94,3 +95,6 @@ insert into Account values('duong2k1','duong2k1','Quản lý',1);
 select * from Employee
 
 select * from Account
+
+select *from Tables
+delete from Tables where idTB=9
