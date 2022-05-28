@@ -25,10 +25,10 @@ Bài tập lớn java nhóm 5: Phòng, Hường, Dương, Đông, Phương. Sử
 - git checkout -b feature
 - git add .
 - git commit -m “fix api get all user”
-- git checkout develop
-- git pull origin develop
+- git checkout master
+- git pull origin master
 - git checkout feature
-- git rebase develop (rebase với nhánh develop để đồng nhất code mới nhất)
+- git rebase master (rebase với nhánh develop để đồng nhất code mới nhất)
 Nếu xảy conflict thì vào xem lại code bị conflict, sửa code, sau đó thực  hiện 2 lệnh sau (Nếu k bị conflict thì bỏ qua):
 	+ git add .
 	+ git rebase –continue
