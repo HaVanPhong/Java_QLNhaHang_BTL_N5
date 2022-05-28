@@ -15,10 +15,10 @@ Bài tập lớn java nhóm 5: Phòng, Hường, Dương, Đông, Phương. Sử
 - Cd đến thư mục chứa code
 - Checkout sang một nhánh mới để làm việc (lưu ý: mỗi một tính năng là một nhánh mới)
 - Sau khi thay đổi, code xong ta sẽ add code và tạo commit
-- Checkout sang nhánh develop để pull code mới nhất về
+- Checkout sang nhánh master để pull code mới nhất về
 - Checkout ngược lại sang nhánh ta đang làm việc
-- Đứng ở đây rebase với nhánh develop để đồng bộ code, nếu xảy ra conflict sẽ xử lý ở bước này
-- Push code lên và tạo pull request
+- Đứng ở đây rebase với nhánh master để đồng bộ code, nếu xảy ra conflict sẽ xử lý ở bước này
+- Push code lên và tạo pull request trên github
 	
 ## Các câu lệnh tương ứng:
 - git clone
