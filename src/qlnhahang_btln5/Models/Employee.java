@@ -29,7 +29,15 @@ public class Employee {
         this.salary = salary;
         this.position = position;
     }
-
+    public Employee(String fullname, String phone, String gender, String birthday, float salary,String address,String position) {
+        this.fullname = fullname;
+        this.phone = phone;
+        this.birthday = birthday;
+        this.address = address;
+        this.gender = gender;
+        this.salary = salary;
+        this.position = position;
+    }
     public Employee() {
     }
 

@@ -108,7 +108,7 @@ public class Home extends javax.swing.JFrame {
 
     private void qlNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_qlNhanVienActionPerformed
         // TODO add your handling code here:
-        ManagerEmployee mn = new ManagerEmployee();
+        EmployeeManager mn = new EmployeeManager();
         mn.setVisible(true);
     }//GEN-LAST:event_qlNhanVienActionPerformed
 
