@@ -12,13 +12,24 @@ package qlnhahang_btln5.Models;
 public class Tables {
     private int idTB;
     private int tbNumber;
-    public Tables(int idTB, int tbNumber) {
+    private String ghiChu;
+    public Tables(int idTB, int tbNumber, String ghiChu) {
         this.idTB = idTB;
         this.tbNumber = tbNumber;
+        this.ghiChu= ghiChu;
     }
 
     public Tables() {
     }
+
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
+    }
+    
 
     public int getIdTB() {
         return idTB;
