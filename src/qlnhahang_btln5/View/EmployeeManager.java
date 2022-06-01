@@ -31,6 +31,7 @@ public class EmployeeManager extends javax.swing.JFrame {
     }
     public void  ShowTable(){
         listEmp = EmployeeController.GetAllEmployee();
+        System.out.println(listEmp.size());
         model.setRowCount(0);
         int stt =1;
         for (Employee emp : listEmp) {
