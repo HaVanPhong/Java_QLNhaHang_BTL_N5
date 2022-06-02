@@ -9,17 +9,27 @@ package qlnhahang_btln5.Models;
  *
  * @author HaPhong
  */
-public class Table {
+public class Tables {
     private int idTB;
     private int tbNumber;
-
-    public Table(int idTB, int tbNumber) {
+    private String ghiChu;
+    public Tables(int idTB, int tbNumber, String ghiChu) {
         this.idTB = idTB;
         this.tbNumber = tbNumber;
+        this.ghiChu= ghiChu;
     }
 
-    public Table() {
+    public Tables() {
     }
+
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
+    }
+    
 
     public int getIdTB() {
         return idTB;
@@ -39,3 +49,4 @@ public class Table {
     
     
 }
+

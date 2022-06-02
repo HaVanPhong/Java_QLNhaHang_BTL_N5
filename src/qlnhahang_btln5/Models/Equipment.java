@@ -12,10 +12,10 @@ package qlnhahang_btln5.Models;
 public class Equipment {
     private int idEquip;
     private String name;
-    private long price;
+    private double price;
     private int quantity;
 
-    public Equipment(int idEquip, String name, long price, int quantity) {
+    public Equipment(int idEquip, String name, double price, int quantity) {
         this.idEquip = idEquip;
         this.name = name;
         this.price = price;
@@ -41,11 +41,11 @@ public class Equipment {
         this.name = name;
     }
 
-    public long getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

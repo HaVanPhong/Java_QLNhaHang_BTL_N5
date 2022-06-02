@@ -12,9 +12,9 @@ package qlnhahang_btln5.Models;
 public class Dish {
     private int idDish;
     private String name;
-    private long price;
+    private double price;
 
-    public Dish(int idDish, String name, long price) {
+    public Dish(int idDish, String name, double price) {
         this.idDish = idDish;
         this.name = name;
         this.price = price;
@@ -39,11 +39,11 @@ public class Dish {
         this.name = name;
     }
 
-    public long getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(double price) {
         this.price = price;
     }
     

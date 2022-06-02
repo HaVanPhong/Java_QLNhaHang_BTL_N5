@@ -12,20 +12,18 @@ package qlnhahang_btln5.Models;
 public class ExpenseDetail {
     private int idExpDetail;
     private int quantity;
-    private int price;
+    private double price;
     private String type;
     private int idExp;
-    private int idEquip;
-    private int idMat;
+    private int id_type;
 
-    public ExpenseDetail(int idExpDetail, int quantity, int price, String type, int idExp, int idEquip, int idMat) {
+    public ExpenseDetail(int idExpDetail, int quantity, double price, String type, int idExp, int id_type) {
         this.idExpDetail = idExpDetail;
         this.quantity = quantity;
         this.price = price;
         this.type = type;
         this.idExp = idExp;
-        this.idEquip = idEquip;
-        this.idMat = idMat;
+        this.id_type = id_type;
     }
 
     public ExpenseDetail() {
@@ -47,11 +45,11 @@ public class ExpenseDetail {
         this.quantity = quantity;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -71,22 +69,13 @@ public class ExpenseDetail {
         this.idExp = idExp;
     }
 
-    public int getIdEquip() {
-        return idEquip;
+    public int getId_type() {
+        return id_type;
     }
 
-    public void setIdEquip(int idEquip) {
-        this.idEquip = idEquip;
+    public void setId_type(int idEquip) {
+        this.id_type = idEquip;
     }
-
-    public int getIdMat() {
-        return idMat;
-    }
-
-    public void setIdMat(int idMat) {
-        this.idMat = idMat;
-    }
-    
     
     
 }
