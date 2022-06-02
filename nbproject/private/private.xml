@@ -3,19 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/NguyenVanDuong/Ki2Nam3/Java/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/Models/Expense.java</file>
-            <file>file:/D:/NguyenVanDuong/Ki2Nam3/Java/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/Models/Account.java</file>
-            <file>file:/D:/NguyenVanDuong/Ki2Nam3/Java/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/Models/Equipment.java</file>
-            <file>file:/D:/NguyenVanDuong/Ki2Nam3/Java/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/View/Login.java</file>
-            <file>file:/D:/NguyenVanDuong/Ki2Nam3/Java/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/Models/Customer.java</file>
-            <file>file:/D:/NguyenVanDuong/Ki2Nam3/Java/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/Controller/EmployeeController.java</file>
             <file>file:/D:/NguyenVanDuong/Ki2Nam3/Java/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/Controller/SQLProcessing.java</file>
             <file>file:/D:/NguyenVanDuong/Ki2Nam3/Java/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/Controller/AccountController.java</file>
-            <file>file:/D:/NguyenVanDuong/Ki2Nam3/Java/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/View/ViewDemo.java</file>
             <file>file:/D:/NguyenVanDuong/Ki2Nam3/Java/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/View/EmployeeManager.java</file>
-            <file>file:/D:/NguyenVanDuong/Ki2Nam3/Java/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/Models/Employee.java</file>
+            <file>file:/D:/NguyenVanDuong/Ki2Nam3/Java/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/View/CustomerManager.java</file>
+            <file>file:/D:/NguyenVanDuong/Ki2Nam3/Java/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/Models/Customer.java</file>
+            <file>file:/D:/NguyenVanDuong/Ki2Nam3/Java/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/Controller/EmployeeController.java</file>
             <file>file:/D:/NguyenVanDuong/Ki2Nam3/Java/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/Controller/SQLServerConnection.java</file>
-            <file>file:/D:/NguyenVanDuong/Ki2Nam3/Java/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/View/Home.java</file>
         </group>
     </open-files>
 </project-private>
