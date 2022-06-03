@@ -48,7 +48,8 @@ CREATE TABLE Material (
 )
 CREATE TABLE Tables (
   idTB INT IDENTITY(1,1) PRIMARY KEY,
-  tbNumber INT NOT NULL
+  tbNumber INT NOT NULL,
+  note nvarchar(255)
 ) 
 
 CREATE TABLE Expense (
@@ -86,8 +87,6 @@ CREATE TABLE Billdetail (
   constraint fk_pk_Billdetail_Bill foreign key(idBill) references Bill(idBill),
   constraint fk_pk_Billdetail_Dish foreign key(idDish) references Dish(idDish)
 )
-
-
 -- --------------------------------------------------------
 insert into Employee values(N'Nguyễn văn dương','0328669614','6/7/2001',N'Nam',7500000,N'Thanh Hóa','Nhân viên');
 insert into Account values('duong2k1','duong2k1','Quản lý',1);
@@ -96,3 +95,6 @@ insert into Account values('duong2k1','duong2k1','Quản lý',1);
 select * from Employee
 
 select * from Account
+
+select *from Tables
+delete from Tables where idTB=9
