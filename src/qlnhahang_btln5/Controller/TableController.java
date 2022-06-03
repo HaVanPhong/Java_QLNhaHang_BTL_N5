@@ -72,7 +72,8 @@ public class TableController {
            if(resultSet.next()){
                table = new Tables(
                     resultSet.getInt(1),
-                    resultSet.getInt(2)
+                    resultSet.getInt(2),
+                    resultSet.getString(3)
                );
            }
        } catch (SQLException e) {

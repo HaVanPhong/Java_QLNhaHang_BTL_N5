@@ -8,6 +8,7 @@ package qlnhahang_btln5.View;
 import java.util.ArrayList;
 import java.util.Observer;
 import java.util.regex.Pattern;
+import java.util.List;
 import javafx.collections.ObservableList;
 import javax.swing.table.DefaultTableModel;
 import qlnhahang_btln5.Controller.BillController;
@@ -33,11 +34,11 @@ public class CreateBill extends javax.swing.JFrame {
     String [] titleDetail = {"STT","Mã món", "Tên món","Đơn giá", "Số lượng", "Thành tiền" };
     double total = 0;
 
-    static ArrayList<Dish> listDish = new ArrayList<>();
-    static ArrayList<BillDetail> listDetail = new ArrayList<>();
-    static ArrayList<Customer> listCustomer = new ArrayList<>();
-    static ArrayList<Employee> listEmployee = new ArrayList<>();
-    static ArrayList<Tables> listTable = new ArrayList<>();
+    static List<Dish> listDish = new ArrayList<>();
+    static List<BillDetail> listDetail = new ArrayList<>();
+    static List<Customer> listCustomer = new ArrayList<>();
+    static List<Employee> listEmployee = new ArrayList<>();
+    static List<Tables> listTable = new ArrayList<>();
 
 
     class ComboItem
@@ -79,10 +80,10 @@ public class CreateBill extends javax.swing.JFrame {
         modelDish.setColumnIdentifiers(titleDish);        
         modelDetail.setColumnIdentifiers(titleDetail);
 
-        listDish = DishController.getAllDish();
+        listDish = DishController.index();
         listCustomer = CustomerController.getAllCustomer();
         listEmployee = EmployeeController.GetAllEmployee();
-        listTable = TableController.getAllTable();
+        listTable = TableController.readAllTables();
 
         cbbCustomer.removeAllItems();
         cbbCustomer.addItem(new ComboItem("Không xác định", -1));

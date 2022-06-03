@@ -101,7 +101,7 @@ public class BillController {
         return listBill;
     }
     
-    public static boolean createBill(int idCus, int idEmp, int idTb, double total, ArrayList<BillDetail> listDetail){
+    public static boolean createBill(int idCus, int idEmp, int idTb, double total, List<BillDetail> listDetail){
         String sqlCreateBill = "insert into Bill(idCus, idEmp, idTb, total) values (?, ?, ?, ?)";
         String sqlCreateDetail = "insert into Billdetail(idBill, idDish, quantity) values (?, ?, ?)";
         boolean isSuccess = true;
@@ -168,7 +168,7 @@ public class BillController {
         return isSuccess;
     }
     
-     public static boolean updateBill(int idBill, int idCus, int idEmp, int idTb, double total, ArrayList<BillDetail> listDetail){
+     public static boolean updateBill(int idBill, int idCus, int idEmp, int idTb, double total, List<BillDetail> listDetail){
         String sqlUpdateBill = "update Bill set idCus = ?, idEmp = ?, idTb = ?, total = ? where idBill = ?";
         String sqlCreateDetail = "insert into Billdetail(idBill, idDish, quantity) values (?, ?, ?)";
         String sqlDeleteDetail = "delete from Billdetail where idBill = ?";

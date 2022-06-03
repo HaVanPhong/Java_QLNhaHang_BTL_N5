@@ -93,7 +93,8 @@ public class Bill {
             resultSet.next();
             table = new Tables(
                 resultSet.getInt(1),
-                resultSet.getInt(2)
+                resultSet.getInt(2),
+                resultSet.getString(3)
             );
         } catch (SQLException e) {
             System.out.println("Error get table of bill: "+ e.getMessage());
