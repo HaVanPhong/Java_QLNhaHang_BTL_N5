@@ -63,6 +63,22 @@ public class TableController {
         }
     }
     
-    
-    
+    public static Tables getTable(int idTb){
+        Tables table = null;
+        String sql = "select * from Tables where idTB='"+idTb+"'";
+        try {
+            System.out.println("");
+           ResultSet resultSet = statement.executeQuery(sql);
+           if(resultSet.next()){
+               table = new Tables(
+                    resultSet.getInt(1),
+                    resultSet.getInt(2)
+               );
+           }
+       } catch (SQLException e) {
+           System.out.println(e);
+       }
+        return table;
+    }
+
 }

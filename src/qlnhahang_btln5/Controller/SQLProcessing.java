@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 public class SQLProcessing {
     static Connection conn = SQLServerConnection.getJDBCConnection();
-    static Statement statement;
+    public static Statement statement;
 
     static {
         try {

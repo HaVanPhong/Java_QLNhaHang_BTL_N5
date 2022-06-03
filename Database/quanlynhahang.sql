@@ -70,9 +70,10 @@ CREATE TABLE Expensedetail (
 )
 CREATE TABLE Bill (
   idBill INT IDENTITY(1,1) PRIMARY KEY,
-  idTb INT NOT NULL,
-  idCus INT NOT NULL,
-  idEmp INT NOT NULL,
+  idTb INT ,
+  idCus INT,
+  idEmp INT,
+  total money NOT NULL,
   createdAt Date NOT NULL DEFAULT GETDATE(),
   constraint fk_Bill_Tables foreign key(idTb) references Tables(idTb),
   constraint fk_Bill_Customer foreign key(idCus) references Customer(idCus),
@@ -87,14 +88,24 @@ CREATE TABLE Billdetail (
   constraint fk_pk_Billdetail_Bill foreign key(idBill) references Bill(idBill),
   constraint fk_pk_Billdetail_Dish foreign key(idDish) references Dish(idDish)
 )
+
 -- --------------------------------------------------------
 insert into Employee values(N'Nguyễn văn dương','0328669614','6/7/2001',N'Nam',7500000,N'Thanh Hóa','Nhân viên');
 insert into Account values('duong2k1','duong2k1','Quản lý',1);
-
+insert into Tables values(1)
+insert into Customer values (N'Nguyễn Bá Đông', '0123456789');
+insert into Bill(idTb, idCus, idEmp, total) values(1, 1, 1, 500);
+insert into Dish(name, price) values(N'pizza hải sản', 100000),
+									(N'khoai tây chiên', 20000) 
 
 select * from Employee
 
 select * from Account
 
-select *from Tables
-delete from Tables where idTB=9
+select * from Tables
+
+select * from Customer
+
+select * from Bill
+
+select * from Dish
