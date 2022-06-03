@@ -31,6 +31,10 @@ public class Tables {
     public int getTbNumber() {
         return tbNumber;
     }
+    
+    public String getTbName() {
+        return "Bàn " + tbNumber;
+    }
 
     public void setTbNumber(int tbNumber) {
         this.tbNumber = tbNumber;
