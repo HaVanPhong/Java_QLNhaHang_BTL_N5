@@ -5,6 +5,10 @@
  */
 package qlnhahang_btln5.Models;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import qlnhahang_btln5.Controller.SQLProcessing;
+
 /**
  *
  * @author HaPhong
@@ -46,4 +50,40 @@ public class BillDetail {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+    
+    public Dish getDish() {
+        Dish dish = null;
+        String sql = "select * from Dish where idDish = " + idDish;
+        try {
+            ResultSet resultSet = SQLProcessing.statement.executeQuery(sql);
+            resultSet.next();
+            dish = new Dish(
+                resultSet.getInt(1),
+                resultSet.getString(2),
+                resultSet.getDouble(3)
+            );
+        } catch (SQLException e) {
+            System.out.println("Error get dish of bill detail: "+ e.getMessage());
+        }
+
+        return dish;
+    }
+    
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final BillDetail other = (BillDetail) obj;
+        if (this.idBill == other.idBill && this.idDish == other.idDish) {
+            return true;
+        }
+        return false;
+    }
+    
+    
 }
