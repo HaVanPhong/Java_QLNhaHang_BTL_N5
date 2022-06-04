@@ -9,9 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import static qlnhahang_btln5.Controller.SQLProcessing.statement;
+import qlnhahang_btln5.Models.Account;
 import qlnhahang_btln5.Models.Employee;
 /**
  *
@@ -22,7 +21,6 @@ public class EmployeeController {
         Employee emp = null;
         String sql = "select * from Employee where idEmp='"+idEmp+"'";
         try {
-                System.out.println("");
                ResultSet resultSet = statement.executeQuery(sql);
                if(resultSet.next()){
                    emp = new Employee(
@@ -128,7 +126,6 @@ public class EmployeeController {
     }
     public static ArrayList<Employee> SearchEmployee(String str){
         ArrayList<Employee> list = new ArrayList<>();
-        System.out.println("str : "+str);
         String sql = "Select * from  Employee where fullname like N'%"+str+"%'";
                             
         try {
@@ -151,4 +148,5 @@ public class EmployeeController {
         }
         return list;
     }
+
 }

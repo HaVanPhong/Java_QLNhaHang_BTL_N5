@@ -6,6 +6,7 @@
 package qlnhahang_btln5.Controller;
 
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -64,13 +65,72 @@ public class AccountController {
         return cus;
     }
     public static boolean CreateAccount(String username,String password,String role,int idEmp){
-        String sql  = "insert into Account values('"+username+"','"+password+"','"+role+"','"+idEmp+"')";
+        String sql  = "insert into Account values( ? , ? , ? , ?)";
         try {
-            ResultSet resultSet = statement.executeQuery(sql);
-            return true;  
+            PreparedStatement pstmt = SQLProcessing.conn.prepareStatement(sql);
+            pstmt.setString(1,username);
+            pstmt.setString(2,password);
+            pstmt.setString(3,role);
+            pstmt.setInt(4,idEmp);
+            System.out.println(username+" "+password+"   "+role+"   "+idEmp);
+            if(pstmt.executeUpdate() > 0 ){
+                return true;    
+            }
+            System.out.println("số " +pstmt.executeUpdate());
         } catch (SQLException ex) {
             Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+    public static boolean DeleteAccountById(int idUser){
+        String sqlDelete = "Delete from  Account where idUser = ?";                 
+        try {
+            PreparedStatement pstmt = SQLProcessing.conn.prepareStatement(sqlDelete);
+            pstmt.setInt(1,idUser);
+            if(pstmt.executeUpdate() > 0 ){
+                return true;    
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        return false;
+    }
+     public static boolean UpdateAccountById(int idUser,String username,String password,String role){
+        String sqlUpdate = "UPDATE Account "
+                            + "SET username = ?"
+                            + " , password = ?"
+                            + " WHERE idUser = ?";              
+        try {
+            PreparedStatement pstmt = SQLProcessing.conn.prepareStatement(sqlUpdate);
+            pstmt.setInt(1,idUser);
+            pstmt.setString(2,username);
+            pstmt.setString(3,password);
+            pstmt.setString(4,role);
+            if(pstmt.executeUpdate() > 0 ){
+                return true;    
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        return false;
+    }
+    public static Account getAccountByIdEmp(int idEmp){
+        Account acc = null;
+        String sql = "Select * from  Account where idEmp = '"+idEmp+"'";                    
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                acc = new Account(
+                        resultSet.getInt(1),
+                        resultSet.getString(2),  
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getInt(5)
+                );
+            }
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        return acc;
     }
 }

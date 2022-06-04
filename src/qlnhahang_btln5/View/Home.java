@@ -39,9 +39,10 @@ public class Home extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
-        qlNhanVien = new javax.swing.JMenuItem();
         qlThucDon = new javax.swing.JMenuItem();
         qlBan = new javax.swing.JMenuItem();
+        qlNhanVien = new javax.swing.JMenuItem();
+        btnQLAccount = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
 
@@ -61,6 +62,12 @@ public class Home extends javax.swing.JFrame {
         jMenu3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jMenu3.setText("Quản lý");
 
+        qlThucDon.setText("Thực đơn");
+        jMenu3.add(qlThucDon);
+
+        qlBan.setText("Bàn");
+        jMenu3.add(qlBan);
+
         qlNhanVien.setText("Nhân viên");
         qlNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -74,11 +81,13 @@ public class Home extends javax.swing.JFrame {
         });
         jMenu3.add(qlNhanVien);
 
-        qlThucDon.setText("Thực đơn");
-        jMenu3.add(qlThucDon);
-
-        qlBan.setText("Bàn");
-        jMenu3.add(qlBan);
+        btnQLAccount.setText("Tài khoản");
+        btnQLAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQLAccountActionPerformed(evt);
+            }
+        });
+        jMenu3.add(btnQLAccount);
 
         jMenuBar1.add(jMenu3);
 
@@ -115,6 +124,11 @@ public class Home extends javax.swing.JFrame {
     private void qlNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_qlNhanVienMouseClicked
         
     }//GEN-LAST:event_qlNhanVienMouseClicked
+
+    private void btnQLAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLAccountActionPerformed
+        AccountManager am = new AccountManager();
+        am.setVisible(true);
+    }//GEN-LAST:event_btnQLAccountActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,6 +173,7 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem btnQLAccount;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

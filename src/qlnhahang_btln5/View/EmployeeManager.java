@@ -5,7 +5,9 @@
  */
 package qlnhahang_btln5.View;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import qlnhahang_btln5.Controller.EmployeeController;
@@ -17,6 +19,8 @@ import qlnhahang_btln5.Models.Employee;
  */
 public class EmployeeManager extends javax.swing.JFrame {
     DefaultTableModel model = null;
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    Date date = new Date();
     String [] Tile = {"STT","ID","Họ tên","SDT","Ngày sinh","Giới tính","Lương","Địa chỉ","Vị trí"};
     static ArrayList<Employee> listEmp = new ArrayList<>();
     
@@ -25,6 +29,7 @@ public class EmployeeManager extends javax.swing.JFrame {
      */
     public EmployeeManager() {
         initComponents();
+        dateBirthDay.setDate(date);
         model =  (DefaultTableModel) tbQlEmp.getModel();
         model.setColumnIdentifiers(Tile);
         ShowTable();
@@ -65,8 +70,8 @@ public class EmployeeManager extends javax.swing.JFrame {
         btnRefesh = new javax.swing.JButton();
         lable = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
-        txtBirthDay = new javax.swing.JTextField();
         txtSalary = new javax.swing.JTextField();
+        dateBirthDay = new com.toedter.calendar.JDateChooser();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbQlEmp = new javax.swing.JTable();
         txtSearch = new javax.swing.JTextField();
@@ -159,17 +164,13 @@ public class EmployeeManager extends javax.swing.JFrame {
             }
         });
 
-        txtBirthDay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBirthDayActionPerformed(evt);
-            }
-        });
-
         txtSalary.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSalaryActionPerformed(evt);
             }
         });
+
+        dateBirthDay.setDateFormatString("dd-MM-yyyy");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -208,12 +209,12 @@ public class EmployeeManager extends javax.swing.JFrame {
                                                 .addComponent(rdoFemale)
                                                 .addGap(10, 10, 10))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(txtfullname, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtBirthDay, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(txtfullname, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                                                    .addComponent(txtPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                                                    .addComponent(txtSalary, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                                                    .addComponent(dateBirthDay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                                 .addGap(0, 0, Short.MAX_VALUE)))))))
                         .addContainerGap(52, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -235,9 +236,9 @@ public class EmployeeManager extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBirthDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dateBirthDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -254,7 +255,7 @@ public class EmployeeManager extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbbPositon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -321,8 +322,8 @@ public class EmployeeManager extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 748, Short.MAX_VALUE)
-                        .addGap(17, 17, 17))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -341,9 +342,9 @@ public class EmployeeManager extends javax.swing.JFrame {
                         .addComponent(txtSearch))
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 694, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -365,7 +366,7 @@ public class EmployeeManager extends javax.swing.JFrame {
     private void txtfullnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfullnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtfullnameActionPerformed
-
+    
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
        try {
             int row = tbQlEmp.getSelectedRow();
@@ -374,7 +375,7 @@ public class EmployeeManager extends javax.swing.JFrame {
             System.out.println("idEmp : "+idEmp);
             String fullname = txtfullname.getText();
             String phone = txtPhone.getText();
-            String birthDay = txtBirthDay.getText();
+            String birthDay = dateFormat.format(dateBirthDay.getDate());
             String gender = (rdoMale.isSelected() == true) ? "Nam" : "nữ";
             String address = txtAddress.getText();
             String position = cbbPositon.getSelectedItem().toString();
@@ -403,7 +404,7 @@ public class EmployeeManager extends javax.swing.JFrame {
             
             String fullname = txtfullname.getText();
             String phone = txtPhone.getText();
-            String birthDay = txtBirthDay.getText();
+            String birthDay = dateFormat.format(dateBirthDay.getDate());
             String gender = (rdoMale.isSelected() == true) ? "Nam" : "nữ";
             String address = txtAddress.getText();
             String position = cbbPositon.getSelectedItem().toString();
@@ -411,6 +412,7 @@ public class EmployeeManager extends javax.swing.JFrame {
             Employee newEmp = new Employee(fullname, phone, gender, birthDay, salary, address, position);
             if(EmployeeController.CreateEmployee(newEmp)){
                 System.out.println("Thêm thành công!");
+                ShowTable();
             }else{
                 System.out.println("Thêm thất bại!!");
             }
@@ -423,10 +425,6 @@ public class EmployeeManager extends javax.swing.JFrame {
     private void txtPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPhoneActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPhoneActionPerformed
-
-    private void txtBirthDayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBirthDayActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBirthDayActionPerformed
 
     private void txtSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSalaryActionPerformed
         // TODO add your handling code here:
@@ -445,7 +443,7 @@ public class EmployeeManager extends javax.swing.JFrame {
         int row = tbQlEmp.getSelectedRow();
         txtfullname.setText(model.getValueAt(row,2).toString());
         txtPhone.setText(model.getValueAt(row,3).toString());
-        txtBirthDay.setText(model.getValueAt(row,4).toString());
+        dateBirthDay.setDateFormatString(model.getValueAt(row,4).toString());
         if(model.getValueAt(row,5).toString().equals("Nam")){
             rdoMale.setSelected(true);
         }else{
@@ -466,6 +464,7 @@ public class EmployeeManager extends javax.swing.JFrame {
                 ClearForm();
             }
         }
+        ShowTable();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
@@ -481,9 +480,10 @@ public class EmployeeManager extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchActionPerformed
     
     void ClearForm(){
+        
         txtfullname.requestFocus();
         txtAddress.setText("");
-        txtBirthDay.setText("");
+        dateBirthDay.setDate(date);
         txtPhone.setText("");
         txtSalary.setText("");
         txtfullname.setText("");
@@ -534,6 +534,7 @@ public class EmployeeManager extends javax.swing.JFrame {
     private javax.swing.JButton btnSearch;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbbPositon;
+    private com.toedter.calendar.JDateChooser dateBirthDay;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
@@ -550,7 +551,6 @@ public class EmployeeManager extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdoMale;
     private javax.swing.JTable tbQlEmp;
     private javax.swing.JTextArea txtAddress;
-    private javax.swing.JTextField txtBirthDay;
     private javax.swing.JTextField txtPhone;
     private javax.swing.JTextField txtSalary;
     private javax.swing.JTextField txtSearch;

@@ -10,7 +10,6 @@ import java.sql.Statement;
 public class SQLProcessing {
     static Connection conn = SQLServerConnection.getJDBCConnection();
     static Statement statement;
-
     static {
         try {
             if (conn!=null){
@@ -26,9 +25,4 @@ public class SQLProcessing {
             System.out.println("Error: "+ ex.getMessage());
         } 
     }
-    
-
-    //---------------------------- 
-    
-    
 }

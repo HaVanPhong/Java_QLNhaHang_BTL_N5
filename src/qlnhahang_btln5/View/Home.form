@@ -44,15 +44,6 @@
             <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd;"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="qlNhanVien">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Nh&#xe2;n vi&#xea;n"/>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="qlNhanVienMouseClicked"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="qlNhanVienActionPerformed"/>
-              </Events>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="qlThucDon">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Th&#x1ef1;c &#x111;&#x1a1;n"/>
@@ -62,6 +53,23 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="B&#xe0;n"/>
               </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="qlNhanVien">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Nh&#xe2;n vi&#xea;n"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="qlNhanVienMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="qlNhanVienActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="btnQLAccount">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="T&#xe0;i kho&#x1ea3;n"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQLAccountActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
