@@ -89,12 +89,8 @@ CREATE TABLE Billdetail (
 )
 -- --------------------------------------------------------
 insert into Employee values(N'Nguyễn văn dương','0328669614','6/7/2001',N'Nam',7500000,N'Thanh Hóa','Nhân viên');
-insert into Account values('duong2k1','duong2k1','Quản lý',1);
-
+insert into Account values('duong2k1','duong2k1',N'Quản lý',1);
 
 select * from Employee
 
 select * from Account
-
-select *from Tables
-delete from Tables where idTB=9
