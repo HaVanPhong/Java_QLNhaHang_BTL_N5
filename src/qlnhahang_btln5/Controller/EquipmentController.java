@@ -10,16 +10,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import static qlnhahang_btln5.Controller.SQLProcessing.statement;
-import qlnhahang_btln5.Models.Material;
+import qlnhahang_btln5.Models.Equipment;
 import qlnhahang_btln5.Models.Tables;
 
 /**
  *
  * @author HaPhong
  */
-public class MaterialController {
-    public static int insertRecord(Material mat) {
-        String sqlInsert = "insert into Material values (N'"+mat.getName()+"', "+mat.getQuantity()+", N'"+mat.getNote()+"')";
+public class EquipmentController {
+    public static int insertRecord(Equipment equip) {
+        String sqlInsert = "insert into Equipment values (N'"+equip.getName()+"', "+equip.getQuantity()+", N'"+equip.getNote()+"')";
         try {
             return statement.executeUpdate(sqlInsert);
         } catch (SQLException e) {
@@ -28,48 +28,48 @@ public class MaterialController {
         }
     }
     
-    public static List<Material> readAllRecord() {
-        List<Material> mats = new ArrayList<>();
-        String sql = "select * from Material";
+    public static List<Equipment> readAllRecord() {
+        List<Equipment> equips = new ArrayList<>();
+        String sql = "select * from Equipment";
         try {
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
-                Material mat = new Material(
+                Equipment equip = new Equipment(
                         resultSet.getInt(1),
                         resultSet.getString(2),
-                        resultSet.getFloat(3),
+                        resultSet.getInt(3),
                         resultSet.getString(4)                        
                 );
 
-                mats.add(mat);
+                equips.add(equip);
             }
         } catch (SQLException e) {
-            System.out.println("Error: read all material fail");
+            System.out.println("Error: read all equiperial fail");
         }
-        return mats;
+        return equips;
     }
     
-    public static Material getMaterial(int idMat) {
-        Material mat = null;
-        String sql = "select * from Material where idMat = '" + idMat + "'";
+    public static Equipment getEquipment(int idEquip) {
+        Equipment equip = null;
+        String sql = "select * from Equipment where idEquip = '" + idEquip + "'";
         try {
             ResultSet resultSet = statement.executeQuery(sql);
             if(resultSet.next()) {
-                mat = new Material(
+                equip = new Equipment(
                     resultSet.getInt(1),
                     resultSet.getString(2),
-                    resultSet.getFloat(3),
+                    resultSet.getInt(3),
                     resultSet.getString(4)                        
                 );
             }
         } catch (SQLException e) {
-            System.out.println("Error: get one material fail");
+            System.out.println("Error: get one equiperial fail");
         }
-        return mat;
+        return equip;
     }
     
-    public static int deleteRecord(int idMat) {
-        String sqlDelete = "delete from Material where idMat = "+idMat+"";
+    public static int deleteRecord(int idEquip) {
+        String sqlDelete = "delete from Equipment where idEquip = "+idEquip+"";
         try {
             return statement.executeUpdate(sqlDelete);
         } catch (SQLException e) {
@@ -77,9 +77,9 @@ public class MaterialController {
             return -1;
         }
     }
-    public static int updateRecord(Material mat) {
+    public static int updateRecord(Equipment equip) {
         String sqlUpdate =
-                "update Material set name =N'"+mat.getName()+ "', quantity="+mat.getQuantity()+", note=N'"+mat.getNote()+"' where idMat ="+mat.getIdMat()+"";
+                "update Equipment set name =N'"+equip.getName()+ "', quantity="+equip.getQuantity()+", note=N'"+equip.getNote()+"' where idEquip ="+equip.getIdEquip()+"";
         try {
             return statement.executeUpdate(sqlUpdate);
         } catch (SQLException e) {

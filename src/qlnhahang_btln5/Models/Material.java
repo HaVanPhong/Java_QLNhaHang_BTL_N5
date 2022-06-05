@@ -9,18 +9,16 @@ package qlnhahang_btln5.Models;
  *
  * @author HaPhong
  */
-public class Material {
+public class Material{
     private int idMat;
     private String name;
-    private int quantity;
-    private String dataImport;
+    private float quantity;
     private String note;
 
-    public Material(int idMat, String name, int quantity, String dataImport, String note) {
+    public Material(int idMat, String name, float quantity, String note) {
         this.idMat = idMat;
         this.name = name;
         this.quantity = quantity;
-        this.dataImport = dataImport;
         this.note = note;
     }
 
@@ -43,20 +41,12 @@ public class Material {
         this.name = name;
     }
 
-    public int getQuantity() {
+    public float getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(float quantity) {
         this.quantity = quantity;
-    }
-
-    public String getDataImport() {
-        return dataImport;
-    }
-
-    public void setDataImport(String dataImport) {
-        this.dataImport = dataImport;
     }
 
     public String getNote() {
@@ -67,6 +57,5 @@ public class Material {
         this.note = note;
     }
     
-    
-    
+   
 }

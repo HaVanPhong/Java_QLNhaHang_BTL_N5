@@ -5,25 +5,41 @@
  */
 package qlnhahang_btln5.Models;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import qlnhahang_btln5.Controller.SQLProcessing;
+
 /**
  *
  * @author HaPhong
  */
 public class ExpenseDetail {
     private int idExpDetail;
+    private int idExp;
+    private int idType;
+    private String type;
     private int quantity;
     private double price;
-    private String type;
-    private int idExp;
-    private int id_type;
+    private String goodsName;
+    
 
-    public ExpenseDetail(int idExpDetail, int quantity, double price, String type, int idExp, int id_type) {
+    public ExpenseDetail(int idExpDetail, int idExp, int idType, String type, int quantity, double price) {
         this.idExpDetail = idExpDetail;
+        this.idExp = idExp;
+        this.idType = idType;
+        this.type = type;
         this.quantity = quantity;
         this.price = price;
-        this.type = type;
+    }
+    
+     public ExpenseDetail(int idExpDetail, int idExp, int idType, String type, int quantity, double price, String goodsName) {
+        this.idExpDetail = idExpDetail;
         this.idExp = idExp;
-        this.id_type = id_type;
+        this.idType = idType;
+        this.type = type;
+        this.quantity = quantity;
+        this.price = price;
+        this.goodsName = goodsName;
     }
 
     public ExpenseDetail() {
@@ -35,6 +51,30 @@ public class ExpenseDetail {
 
     public void setIdExpDetail(int idExpDetail) {
         this.idExpDetail = idExpDetail;
+    }
+
+    public int getIdExp() {
+        return idExp;
+    }
+
+    public void setIdExp(int idExp) {
+        this.idExp = idExp;
+    }
+
+    public int getIdType() {
+        return idType;
+    }
+
+    public void setIdType(int idType) {
+        this.idType = idType;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getQuantity() {
@@ -53,29 +93,11 @@ public class ExpenseDetail {
         this.price = price;
     }
 
-    public String getType() {
-        return type;
+    public String getGoodsName() {
+        return goodsName;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
     }
-
-    public int getIdExp() {
-        return idExp;
-    }
-
-    public void setIdExp(int idExp) {
-        this.idExp = idExp;
-    }
-
-    public int getId_type() {
-        return id_type;
-    }
-
-    public void setId_type(int idEquip) {
-        this.id_type = idEquip;
-    }
-    
-    
 }
