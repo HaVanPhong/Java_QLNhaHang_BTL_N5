@@ -86,6 +86,7 @@ public class DishController {
             ps.setString(1, dish.getName());
             ps.setDouble(2, dish.getPrice());
             ps.setInt(3, dish.getIdDish());
+            System.out.println(sql);
 
             if(ps.executeUpdate() > 0){
                 return  true;
