@@ -3,39 +3,43 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package qlnhahang_btln5.View;
+
+import qlnhahang_btln5.Controller.EquipmentController;
+import qlnhahang_btln5.Models.Dish;
+import qlnhahang_btln5.Models.Equipment;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import qlnhahang_btln5.Controller.DishController;
-import qlnhahang_btln5.Models.Dish;
+
 /**
  *
  * @author Admin
  */
-public class DishManager extends javax.swing.JFrame {
+public class EquipmentManager extends javax.swing.JFrame {
     DefaultTableModel model = null;
-    String [] Title = {"STT","ID","Tên Món Ăn","Giá Bán"};
-    static List<Dish> list = new ArrayList<>();
+    String [] Title = {"STT","ID","Tên thiết bị","Giá", "Số lượng "};
+    static List<Equipment> list = new ArrayList<>();
 
     /**
-     * Creates new form DishManager
+     * Creates new form EquipmentManager
      */
-    public DishManager() {
+    public EquipmentManager() {
+
         initComponents();
-        model = (DefaultTableModel) tbQLDish.getModel();
+        model = (DefaultTableModel) tbQLEquip.getModel();
         model.setColumnIdentifiers(Title);
         showTable();
     }
-
-    public  void showTable(){
-        list = DishController.index();
+    public void showTable(){
+        list = EquipmentController.index();
         System.out.println(list.size());
         model.setRowCount(0);
-        int stt =1;
-        for(Dish dish : list){
-            model.addRow(new  Object[]{
-                    stt++, dish.getIdDish(), dish.getName(), dish.getPrice()
+        int stt = 1;
+        for(Equipment equip : list){
+            model.addRow(new Object[]{
+                    stt++, equip.getIdEquip(), equip.getName(), equip.getPrice(), equip.getQuantity()
             });
         }
     }
@@ -56,10 +60,12 @@ public class DishManager extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        lable = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         txtPrice = new javax.swing.JTextField();
+        txtQuantity = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbQLDish = new javax.swing.JTable();
+        tbQLEquip = new javax.swing.JTable();
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -72,10 +78,10 @@ public class DishManager extends javax.swing.JFrame {
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setText("Tên Món Ăn: ");
+        jLabel4.setText("Tên thiết bị: ");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setText("Giá bán: ");
+        jLabel5.setText("Giá:");
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Create.png"))); // NOI18N
         btnAdd.setText("Thêm");
@@ -101,6 +107,9 @@ public class DishManager extends javax.swing.JFrame {
             }
         });
 
+        lable.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lable.setText("Số lượng: ");
+
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
@@ -113,6 +122,12 @@ public class DishManager extends javax.swing.JFrame {
             }
         });
 
+        txtQuantity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtQuantityActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -120,42 +135,46 @@ public class DishManager extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(29, 29, 29))
+                    .addComponent(lable)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(61, 61, 61)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btnEdit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAdd, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)))
+                        .addGap(116, 116, 116)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(btnAdd, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnEdit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))))
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
+                .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
+                .addGap(40, 40, 40)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lable, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52)
                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(33, 33, 33)
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(336, Short.MAX_VALUE))
+                .addContainerGap(230, Short.MAX_VALUE))
         );
 
-        tbQLDish.setModel(new javax.swing.table.DefaultTableModel(
+        tbQLEquip.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -163,21 +182,21 @@ public class DishManager extends javax.swing.JFrame {
 
             }
         ));
-        tbQLDish.addAncestorListener(new javax.swing.event.AncestorListener() {
+        tbQLEquip.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                tbQLDishAncestorAdded(evt);
+                tbQLEquipAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        tbQLDish.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbQLEquip.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbQLDishMouseClicked(evt);
+                tbQLEquipMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tbQLDish);
+        jScrollPane2.setViewportView(tbQLEquip);
 
         txtSearch.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -207,7 +226,7 @@ public class DishManager extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
                         .addGap(17, 17, 17))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,50 +261,46 @@ public class DishManager extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfullnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtfullnameActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         try {
 
             String name = txtName.getText();
             Double price = Double.parseDouble(txtPrice.getText());
-            Dish dish = new Dish(name, price);
-            if(DishController.store(dish)){
+            int quantity = Integer.parseInt(txtQuantity.getText());
+            Equipment equip = new Equipment(name, price, quantity);
+            if(EquipmentController.store(equip)){
                 System.out.println("Thêm thành công!");
+                ClearForm();
+                showTable();
             }else{
                 System.out.println("Thêm thất bại!!");
             }
 
-            clearForm();
-            showTable();
 
         } catch (Exception e) {
             System.out.println("Vui lòng nhập đầy đủ");
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
-
-
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         try {
-            int row = tbQLDish.getSelectedRow();
+            int row = tbQLEquip.getSelectedRow();
             if(row>=0){
-                int id = Integer.parseInt(model.getValueAt(row,1).toString());
-                System.out.println("id : "+id);
+                int idEquip = Integer.parseInt(model.getValueAt(row,1).toString());
+                System.out.println("idEmp : "+idEquip);
                 String name = txtName.getText();
                 Double price = Double.parseDouble(txtPrice.getText());
-                Dish dish = new Dish(id, name, price);
-                if(DishController.update(dish)){
+                int quantity = Integer.parseInt(txtQuantity.getText());
+                Equipment equipment = new Equipment(idEquip, name, price, quantity);
+                if(EquipmentController.update(equipment)){
                     JOptionPane.showMessageDialog(rootPane, "Update thành công");
-                    clearForm();
+                    ClearForm();
                     showTable();
                 }else{
                     JOptionPane.showMessageDialog(rootPane, "Update thất bại");
@@ -298,12 +313,12 @@ public class DishManager extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        int row = tbQLDish.getSelectedRow();
+        int row = tbQLEquip.getSelectedRow();
         if(row >= 0){
-            if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn xóa?","Admin",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
-                int id = Integer.parseInt(model.getValueAt(row,1).toString());
-                DishController.delete(id);
-                clearForm();
+            if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn xóa ?","Admin",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                int idEquip = Integer.parseInt(model.getValueAt(row,1).toString());
+                EquipmentController.delete(idEquip);
+                ClearForm();
                 showTable();
             }
         }
@@ -317,26 +332,30 @@ public class DishManager extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPriceActionPerformed
 
-    private void tbQLDishAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tbQLDishAncestorAdded
+    private void txtQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtQuantityActionPerformed
 
-    }//GEN-LAST:event_tbQLDishAncestorAdded
+    private void tbQLEquipAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tbQLEquipAncestorAdded
 
-    private void tbQLDishMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLDishMouseClicked
-        int row = tbQLDish.getSelectedRow();
+    }//GEN-LAST:event_tbQLEquipAncestorAdded
+
+    private void tbQLEquipMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLEquipMouseClicked
+        int row = tbQLEquip.getSelectedRow();
         txtName.setText(model.getValueAt(row,2).toString());
         txtPrice.setText(model.getValueAt(row,3).toString());
+        txtQuantity.setText(model.getValueAt(row,4).toString());
 
-    }//GEN-LAST:event_tbQLDishMouseClicked
+    }//GEN-LAST:event_tbQLEquipMouseClicked
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 
-        list = DishController.search(txtSearch.getText());
-        System.out.println(list.size());
+        list = EquipmentController.search(txtSearch.getText());
         model.setRowCount(0);
         int stt = 1 ;
-        for (Dish dish : list) {
+        for (Equipment equip : list) {
             model.addRow(new Object[]{
-                stt++,dish.getIdDish(),dish.getName(),dish.getPrice()
+                stt++,equip.getIdEquip(),equip.getName(),equip.getPrice(),equip.getQuantity()
             });
         }
     }//GEN-LAST:event_btnSearchActionPerformed
@@ -347,10 +366,11 @@ public class DishManager extends javax.swing.JFrame {
         home.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public  void clearForm(){
+    public  void ClearForm(){
         txtName.setText("");
         txtName.requestFocus();
         txtPrice.setText("");
+        txtQuantity.setText("");
     }
 
     /**
@@ -370,20 +390,20 @@ public class DishManager extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DishManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EquipmentManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DishManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EquipmentManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DishManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EquipmentManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DishManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EquipmentManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DishManager().setVisible(true);
+                new EquipmentManager().setVisible(true);
             }
         });
     }
@@ -399,9 +419,11 @@ public class DishManager extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tbQLDish;
+    private javax.swing.JLabel lable;
+    private javax.swing.JTable tbQLEquip;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPrice;
+    private javax.swing.JTextField txtQuantity;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
