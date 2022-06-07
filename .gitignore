@@ -1,5 +1,7 @@
 /build/
 /dist/
-.idea
+nbproject/
+.idea/
+out/
+SQLServerConnection.java
 Java_QLNhaHang_BTL_N5.iml
-out

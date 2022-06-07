@@ -19,7 +19,7 @@ import qlnhahang_btln5.Models.Tables;
  */
 public class MaterialController {
     public static int insertRecord(Material mat) {
-        String sqlInsert = "insert into Material values (N'"+mat.getName()+"', "+mat.getQuantity()+", '"+mat.getDataImport()+"', N'"+mat.getNote()+"')";
+        String sqlInsert = "insert into Material values (N'"+mat.getName()+"', "+mat.getQuantity()+", N'"+mat.getNote()+"')";
         try {
             return statement.executeUpdate(sqlInsert);
         } catch (SQLException e) {
@@ -37,9 +37,8 @@ public class MaterialController {
                 Material mat = new Material(
                         resultSet.getInt(1),
                         resultSet.getString(2),
-                        resultSet.getInt(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5)                        
+                        resultSet.getFloat(3),
+                        resultSet.getString(4)                        
                 );
 
                 mats.add(mat);
@@ -48,6 +47,25 @@ public class MaterialController {
             System.out.println("Error: read all material fail");
         }
         return mats;
+    }
+    
+    public static Material getMaterial(int idMat) {
+        Material mat = null;
+        String sql = "select * from Material where idMat = '" + idMat + "'";
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+            if(resultSet.next()) {
+                mat = new Material(
+                    resultSet.getInt(1),
+                    resultSet.getString(2),
+                    resultSet.getFloat(3),
+                    resultSet.getString(4)                        
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: get one material fail");
+        }
+        return mat;
     }
     
     public static int deleteRecord(int idMat) {
@@ -61,7 +79,7 @@ public class MaterialController {
     }
     public static int updateRecord(Material mat) {
         String sqlUpdate =
-                "update Material set name =N'"+mat.getName()+ "', quantity="+mat.getQuantity()+", dataImport="+mat.getDataImport()+", note=N'"+mat.getNote()+"' where idMat ="+mat.getIdMat()+"";
+                "update Material set name =N'"+mat.getName()+ "', quantity="+mat.getQuantity()+", note=N'"+mat.getNote()+"' where idMat ="+mat.getIdMat()+"";
         try {
             return statement.executeUpdate(sqlUpdate);
         } catch (SQLException e) {

@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import qlnhahang_btln5.Controller.AccountController;
 import qlnhahang_btln5.Models.Account;
+import qlnhahang_btln5.Models.Employee;
 
 /**
  *
@@ -16,6 +17,7 @@ import qlnhahang_btln5.Models.Account;
  */
 public class Login extends javax.swing.JFrame {
     List<Account> liAcount;
+    public static int idCurrentEmployee= 1;
     /**
      * Creates new form Login
      */
@@ -175,7 +177,8 @@ public class Login extends javax.swing.JFrame {
         if(username.equals("") || password.equals("")) {
             JOptionPane.showMessageDialog(this,"Vui vòng nhập đủ thông tin!");
         }else if(AccountController.CheckLogin(username, password) != null){
-            Home h = new Home(AccountController.CheckLogin(username, password).getIdEmp());
+            idCurrentEmployee= AccountController.CheckLogin(username, password).getIdEmp();
+            Home h = new Home(idCurrentEmployee);
             h.setVisible(true);
             this.dispose();
             JOptionPane.showMessageDialog(this,"Đăng nhập thành công!");

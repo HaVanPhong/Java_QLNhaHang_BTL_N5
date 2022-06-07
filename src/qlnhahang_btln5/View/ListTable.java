@@ -1,5 +1,6 @@
 package qlnhahang_btln5.View;
 
+import java.awt.Color;
 import java.awt.Component;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
@@ -25,9 +26,15 @@ public class ListTable<E extends Object> extends JList<E>{
             public Component getListCellRendererComponent(JList<?> list, Object o, int index, boolean isSelected, boolean cellHasFocus) {
                 TableItem item= new TableItem();
                 item.setItem(o);
-                
+                item.setBackground(Color.yellow);
                 return item;
             }
+
+            @Override
+            public void setBackground(Color bg) {
+                super.setBackground(bg); //To change body of generated methods, choose Tools | Templates.
+            }
+                
             
         };
     }
