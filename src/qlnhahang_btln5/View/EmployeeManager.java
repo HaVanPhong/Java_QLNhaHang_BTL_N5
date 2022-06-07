@@ -13,7 +13,7 @@ import qlnhahang_btln5.Models.Employee;
 
 /**
  *
- * @author duong
+ * @author huong
  */
 public class EmployeeManager extends javax.swing.JFrame {
     DefaultTableModel model = null;
@@ -375,7 +375,7 @@ public class EmployeeManager extends javax.swing.JFrame {
             String fullname = txtfullname.getText();
             String phone = txtPhone.getText();
             String birthDay = txtBirthDay.getText();
-            String gender = (rdoMale.isSelected() == true) ? "Nam" : "nữ";
+            String gender = (rdoMale.isSelected() == true) ? "Nam" : "Nữ";
             String address = txtAddress.getText();
             String position = cbbPositon.getSelectedItem().toString();
             float salary = Float.parseFloat(txtSalary.getText());
@@ -404,7 +404,7 @@ public class EmployeeManager extends javax.swing.JFrame {
             String fullname = txtfullname.getText();
             String phone = txtPhone.getText();
             String birthDay = txtBirthDay.getText();
-            String gender = (rdoMale.isSelected() == true) ? "Nam" : "nữ";
+            String gender = (rdoMale.isSelected() == true) ? "Nam" : "Nữ";
             String address = txtAddress.getText();
             String position = cbbPositon.getSelectedItem().toString();
             float salary = Float.parseFloat(txtSalary.getText());
