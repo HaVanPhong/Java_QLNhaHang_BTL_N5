@@ -98,11 +98,15 @@ insert into Customer values (N'Nguyễn Bá Đông', '0123456789');
 insert into Dish(name, price) values(N'pizza hải sản', 100000),
 									(N'khoai tây chiên', 20000) 
 
+insert into Customer values ('anonymous', '0000')
+
+
 insert into Material(name, quantity) values (N'Thịt lợn', 20),
 											(N'Cần tây', 10)
 
 insert into Equipment(name, quantity) values(N'Bàn', 10),
 											(N'Ghế', 10)
+
 
 select * from Employee
 
@@ -115,4 +119,7 @@ select * from Customer
 select * from Bill
 
 select * from Dish
+
+
+select * from Billdetail
 

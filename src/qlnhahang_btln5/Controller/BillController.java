@@ -143,6 +143,7 @@ public class BillController {
             
             preCreateDetail.setInt(1, idBill);
             for(BillDetail detail : listDetail) {
+                System.out.println(idBill+" - "+ detail.getIdDish());
                 preCreateDetail.setInt(2, detail.getIdDish());
                 preCreateDetail.setInt(3, detail.getQuantity());
                 preCreateDetail.executeUpdate();
@@ -150,7 +151,7 @@ public class BillController {
 
             SQLProcessing.conn.commit();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("error: "+ e.getMessage());
             try {
                 SQLProcessing.conn.rollback();
             } catch (Exception ex) {
