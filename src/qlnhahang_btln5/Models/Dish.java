@@ -10,9 +10,9 @@ package qlnhahang_btln5.Models;
  * @author HaPhong
  */
 public class Dish {
-    private int idDish;
-    private String name;
-    private double price;
+    protected int idDish;
+    protected String name;
+    protected double price;
 
     public Dish(int idDish, String name, double price) {
         this.idDish = idDish;

@@ -52,4 +52,23 @@ public class CustomerController {
         }
         return listCus;
     }
+    
+    //ké
+    public static Customer getCustomerByPhone(String phone){
+        Customer customer = null;
+        String sql = "select * from Customer where phone='"+phone+"'";
+        try {
+            ResultSet resultSet = statement.executeQuery(sql);
+            if(resultSet.next()){
+                customer = new Customer(
+                     resultSet.getInt(1),
+                     resultSet.getString(2),
+                     resultSet.getString(3)
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return customer;
+    }
 }

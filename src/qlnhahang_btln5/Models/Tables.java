@@ -50,6 +50,11 @@ public class Tables {
     public void setTbNumber(int tbNumber) {
         this.tbNumber = tbNumber;
     }
+
+    @Override
+    public String toString() {
+        return "" +  tbNumber;
+    }
     
     
 }
