@@ -9,17 +9,17 @@ package qlnhahang_btln5.Models;
  *
  * @author HaPhong
  */
-public class Equipment {
+public class Equipment{
     private int idEquip;
     private String name;
-    private double price;
     private int quantity;
+    private String note;
 
-    public Equipment(int idEquip, String name, double price, int quantity) {
+    public Equipment(int idEquip, String name, int quantity, String note) {
         this.idEquip = idEquip;
         this.name = name;
-        this.price = price;
         this.quantity = quantity;
+        this.note = note;
     }
 
     public Equipment() {
@@ -41,14 +41,6 @@ public class Equipment {
         this.name = name;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -56,7 +48,14 @@ public class Equipment {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    
-    
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+   
     
 }
