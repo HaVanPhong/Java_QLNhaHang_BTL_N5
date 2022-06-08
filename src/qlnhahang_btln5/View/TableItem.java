@@ -24,10 +24,15 @@ public class TableItem extends javax.swing.JPanel {
         if (obj instanceof Tables){ 
             Tables item= (Tables) obj;
             lbSoBan.setText(item.getTbNumber()+"");
+            
         }else {
             lbSoBan.setText(obj+"");
         }
         
+    }
+    
+    public void setBackgroundd(Color color){
+        jPBG.setBackground(color);
     }
 
     
@@ -105,7 +110,8 @@ public class TableItem extends javax.swing.JPanel {
     }//GEN-LAST:event_jPBGFocusLost
 
     private void jPBGMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPBGMouseClicked
-        jPBG.setBackground(Color.yellow);
+       System.out.println("item click");
+       
     }//GEN-LAST:event_jPBGMouseClicked
 
     
