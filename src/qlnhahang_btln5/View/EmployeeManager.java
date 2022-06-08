@@ -5,7 +5,12 @@
  */
 package qlnhahang_btln5.View;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import qlnhahang_btln5.Controller.EmployeeController;
@@ -17,6 +22,8 @@ import qlnhahang_btln5.Models.Employee;
  */
 public class EmployeeManager extends javax.swing.JFrame {
     DefaultTableModel model = null;
+    SimpleDateFormat dateF = new SimpleDateFormat("dd/MM/yyyy");
+    Date d = new Date();
     String [] Tile = {"STT","ID","Họ tên","SDT","Ngày sinh","Giới tính","Lương","Địa chỉ","Vị trí"};
     static ArrayList<Employee> listEmp = new ArrayList<>();
     
@@ -27,11 +34,12 @@ public class EmployeeManager extends javax.swing.JFrame {
         initComponents();
         model =  (DefaultTableModel) tbQlEmp.getModel();
         model.setColumnIdentifiers(Tile);
+        txtBirthday.setDate(d);
         ShowTable();
     }
     public void  ShowTable(){
         listEmp = EmployeeController.GetAllEmployee();
-        System.out.println(listEmp.size());
+        //System.out.println(listEmp.size());
         model.setRowCount(0);
         int stt =1;
         for (Employee emp : listEmp) {
@@ -65,20 +73,21 @@ public class EmployeeManager extends javax.swing.JFrame {
         btnRefesh = new javax.swing.JButton();
         lable = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
-        txtBirthDay = new javax.swing.JTextField();
         txtSalary = new javax.swing.JTextField();
+        txtBirthday = new com.toedter.calendar.JDateChooser();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbQlEmp = new javax.swing.JTable();
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnHome = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản lý nhân viên");
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -159,17 +168,13 @@ public class EmployeeManager extends javax.swing.JFrame {
             }
         });
 
-        txtBirthDay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBirthDayActionPerformed(evt);
-            }
-        });
-
         txtSalary.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSalaryActionPerformed(evt);
             }
         });
+
+        txtBirthday.setDateFormatString("dd/MM/yyyy");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -208,12 +213,12 @@ public class EmployeeManager extends javax.swing.JFrame {
                                                 .addComponent(rdoFemale)
                                                 .addGap(10, 10, 10))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(txtfullname, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtBirthDay, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(txtSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(txtfullname, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                                                    .addComponent(txtPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                                                    .addComponent(txtSalary, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                                                    .addComponent(txtBirthday, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                                 .addGap(0, 0, Short.MAX_VALUE)))))))
                         .addContainerGap(52, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -235,9 +240,9 @@ public class EmployeeManager extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBirthDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -268,6 +273,8 @@ public class EmployeeManager extends javax.swing.JFrame {
                     .addComponent(btnRefesh, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(56, 56, 56))
         );
+
+        jScrollPane2.setBackground(new java.awt.Color(204, 255, 204));
 
         tbQlEmp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -303,11 +310,12 @@ public class EmployeeManager extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Home.png"))); // NOI18N
-        jButton2.setText("Home");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnHome.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Home.png"))); // NOI18N
+        btnHome.setText("Trang chủ");
+        btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnHomeActionPerformed(evt);
             }
         });
 
@@ -324,7 +332,7 @@ public class EmployeeManager extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 748, Short.MAX_VALUE)
                         .addGap(17, 17, 17))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -338,8 +346,8 @@ public class EmployeeManager extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnSearch)
-                        .addComponent(txtSearch))
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnHome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -371,62 +379,103 @@ public class EmployeeManager extends javax.swing.JFrame {
             int row = tbQlEmp.getSelectedRow();
             if(row>=0){
                 int idEmp = Integer.parseInt(model.getValueAt(row,1).toString());
-            System.out.println("idEmp : "+idEmp);
-            String fullname = txtfullname.getText();
-            String phone = txtPhone.getText();
-            String birthDay = txtBirthDay.getText();
-            String gender = (rdoMale.isSelected() == true) ? "Nam" : "Nữ";
-            String address = txtAddress.getText();
-            String position = cbbPositon.getSelectedItem().toString();
-            float salary = Float.parseFloat(txtSalary.getText());
-            Employee UpdateEmp = new Employee(idEmp,fullname, phone, gender, birthDay, salary, address, position);
-                if(EmployeeController.UpdateEmployee(UpdateEmp)){
-                    JOptionPane.showMessageDialog(rootPane, "Update thành công");
-                }else{
-                    JOptionPane.showMessageDialog(rootPane, "Update thất bại");
+                String err ="";
+                String regPhone="^(0)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
+                String fullname = chuanHoa(txtfullname.getText());
+                String phone = txtPhone.getText();
+                if(!phone.matches(regPhone)){
+                    err += "\nHãy nhập số điện thoại đúng định dạng!";
                 }
-            }
+                String birthDay = "";
+                if(txtBirthday.getDate().after(d)){ 
+                    err += "\nHãy nhập ngày sinh nhỏ hơn ngày hiện tại!";
+                }else{
+                    birthDay =  dateF.format(txtBirthday.getDate());
+                }
+                
+                String gender = (rdoMale.isSelected() == true) ? "Nam" : "Nữ";
+                String address = chuanHoa(txtAddress.getText());
+                String position = cbbPositon.getSelectedItem().toString();
+                String sSalary = txtSalary.getText();
+                float salary = 0;
+                if(!sSalary.matches("^\\d+$")){
+                    err += "\nHãy nhập lương là một số nguyên dương!";
+                }else{
+                    salary = Float.parseFloat(txtSalary.getText());
+                }
+                if(err != ""){
+                    JOptionPane.showMessageDialog(rootPane, err);
+                }else{
+                    Employee UpdateEmp = new Employee(idEmp,fullname, phone, gender, birthDay, salary, address, position);
+                    if(EmployeeController.UpdateEmployee(UpdateEmp)){
+                        JOptionPane.showMessageDialog(rootPane, "Sửa thành công!");
+                        ShowTable();
+                        ClearForm();
+                    }else{
+                        JOptionPane.showMessageDialog(rootPane, "Sửa thất bại!");
+                    }
+                }
+                
+        }
             
         } catch (Exception e) {
-            System.out.println("Lỗi update");
+            JOptionPane.showMessageDialog(rootPane, "Lỗi trong quá trình sửa!");
         }
     }//GEN-LAST:event_btnEditActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         Home home = new Home();
         this.dispose();
         home.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnHomeActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         try {
-            
-            String fullname = txtfullname.getText();
+            String err ="";
+            String regPhone="^(0)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
+            String fullname = chuanHoa(txtfullname.getText());
             String phone = txtPhone.getText();
-            String birthDay = txtBirthDay.getText();
-            String gender = (rdoMale.isSelected() == true) ? "Nam" : "Nữ";
-            String address = txtAddress.getText();
-            String position = cbbPositon.getSelectedItem().toString();
-            float salary = Float.parseFloat(txtSalary.getText());
-            Employee newEmp = new Employee(fullname, phone, gender, birthDay, salary, address, position);
-            if(EmployeeController.CreateEmployee(newEmp)){
-                System.out.println("Thêm thành công!");
+            if(!phone.matches(regPhone)){
+                err += "\nHãy nhập số điện thoại đúng định dạng!";
+            }
+            String birthDay = "";
+            if(txtBirthday.getDate().after(d)){ 
+                err += "\nHãy nhập ngày sinh nhỏ hơn ngày hiện tại!";
             }else{
-                System.out.println("Thêm thất bại!!");
+                birthDay =  dateF.format(txtBirthday.getDate());
+            }
+            String gender = (rdoMale.isSelected() == true) ? "Nam" : "Nữ";
+            String address = chuanHoa(txtAddress.getText());
+            String position = cbbPositon.getSelectedItem().toString();
+            String sSalary = txtSalary.getText();
+            float salary = 0;
+            if(!sSalary.matches("^\\d+$")){
+                err += "\nHãy nhập lương là một số nguyên dương!";
+            }else{
+                salary = Float.parseFloat(txtSalary.getText());
+            }
+            if(err != ""){
+                JOptionPane.showMessageDialog(rootPane, err);
+            }else{
+                Employee newEmp = new Employee(fullname, phone, gender, birthDay, salary, address, position);
+                if(EmployeeController.CreateEmployee(newEmp)){
+                    JOptionPane.showMessageDialog(rootPane, "Thêm thành công!");
+                    ShowTable();
+                    ClearForm();
+                }else{
+                    JOptionPane.showMessageDialog(rootPane, "Thêm thất bại!");
+                }
             }
             
-        } catch (Exception e) {
-            System.out.println("Vui lòng nhập đầy đủ");
+            
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập đầy đủ thông tin!");
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void txtPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPhoneActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPhoneActionPerformed
-
-    private void txtBirthDayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBirthDayActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBirthDayActionPerformed
 
     private void txtSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSalaryActionPerformed
         // TODO add your handling code here:
@@ -442,28 +491,34 @@ public class EmployeeManager extends javax.swing.JFrame {
     }//GEN-LAST:event_tbQlEmpAncestorAdded
 
     private void tbQlEmpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQlEmpMouseClicked
-        int row = tbQlEmp.getSelectedRow();
-        txtfullname.setText(model.getValueAt(row,2).toString());
-        txtPhone.setText(model.getValueAt(row,3).toString());
-        txtBirthDay.setText(model.getValueAt(row,4).toString());
-        if(model.getValueAt(row,5).toString().equals("Nam")){
-            rdoMale.setSelected(true);
-        }else{
-            rdoFemale.setSelected(true);
+        try {
+            int row = tbQlEmp.getSelectedRow();
+            txtfullname.setText(model.getValueAt(row,2).toString());
+            txtPhone.setText(model.getValueAt(row,3).toString());
+            txtBirthday.setDate(dateF.parse(model.getValueAt(row,4).toString()));
+            if(model.getValueAt(row,5).toString().equals("Nam")){
+                rdoMale.setSelected(true);
+            }else{
+                rdoFemale.setSelected(true);
+            }
+            txtSalary.setText(model.getValueAt(row,6).toString().split("\\.")[0]);
+            txtAddress.setText(model.getValueAt(row,7).toString());
+            cbbPositon.setSelectedItem(model.getValueAt(row,8));
+        } catch (ParseException ex) {
+            Logger.getLogger(EmployeeManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        txtSalary.setText(model.getValueAt(row,6).toString());
-        txtAddress.setText(model.getValueAt(row,7).toString());
-        cbbPositon.setSelectedItem(model.getValueAt(row,8));
         
     }//GEN-LAST:event_tbQlEmpMouseClicked
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int row = tbQlEmp.getSelectedRow();
         if(row >= 0){
-            if(JOptionPane.showConfirmDialog(rootPane, "Thông báo","Admin",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            if(JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn xóa bản ghi này?","Admin",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                 int idEmp = Integer.parseInt(model.getValueAt(row,1).toString());
                 EmployeeController.DeleteEmployee(idEmp);
+                JOptionPane.showMessageDialog(rootPane, "Xóa thành công!");
                 ClearForm();
+                ShowTable();
             }
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
@@ -479,11 +534,23 @@ public class EmployeeManager extends javax.swing.JFrame {
             });
         }
     }//GEN-LAST:event_btnSearchActionPerformed
-    
+    public String chuanHoa(String name) {
+    String st = name.trim().toLowerCase();
+    st = st.replaceAll("\\s+", " ");
+    String[] temp= st.split(" ");
+            // sau khi tách xong, gán xâu st thành sâu rỗng
+    st="";
+    for(int i=0;i<temp.length;i++) {
+        st+=String.valueOf(temp[i].charAt(0)).toUpperCase() + temp[i].substring(1);
+        if(i<temp.length-1) // nếu tempt[i] không phải từ cuối cùng
+            st+=" ";   // cộng thêm một khoảng trắng
+    }
+    return st;
+}
     void ClearForm(){
         txtfullname.requestFocus();
         txtAddress.setText("");
-        txtBirthDay.setText("");
+        txtBirthday.setDate(d);
         txtPhone.setText("");
         txtSalary.setText("");
         txtfullname.setText("");
@@ -521,7 +588,10 @@ public class EmployeeManager extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EmployeeManager().setVisible(true);
+                EmployeeManager screen = new EmployeeManager();
+                screen.setLocationRelativeTo(null);
+                
+                screen.setVisible(true);
             }
         });
     }
@@ -530,11 +600,11 @@ public class EmployeeManager extends javax.swing.JFrame {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnHome;
     private javax.swing.JButton btnRefesh;
     private javax.swing.JButton btnSearch;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbbPositon;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -550,7 +620,7 @@ public class EmployeeManager extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdoMale;
     private javax.swing.JTable tbQlEmp;
     private javax.swing.JTextArea txtAddress;
-    private javax.swing.JTextField txtBirthDay;
+    private com.toedter.calendar.JDateChooser txtBirthday;
     private javax.swing.JTextField txtPhone;
     private javax.swing.JTextField txtSalary;
     private javax.swing.JTextField txtSearch;

@@ -6,7 +6,9 @@
 package qlnhahang_btln5.View;
 
 import javax.swing.JOptionPane;
+import qlnhahang_btln5.Controller.AccountController;
 import qlnhahang_btln5.Controller.EmployeeController;
+import qlnhahang_btln5.Models.Account;
 import qlnhahang_btln5.Models.Employee;
 
 /**
@@ -15,16 +17,27 @@ import qlnhahang_btln5.Models.Employee;
  */
 public class Home extends javax.swing.JFrame {
     static Employee emp = null;
+    static Account acc =null;
+    static boolean checkSetting = false;
     /**
      * Creates new form Home
      */
     public Home(){
         initComponents();
+//        this.setLocationRelativeTo(null);
+//        panelSetting.setVisible(checkSetting);
     }
     public Home(int idEmp){
         initComponents();
+        this.setLocationRelativeTo(null);
+        panelSetting.setVisible(checkSetting);
         emp = EmployeeController.GetEmployee(idEmp);
-        
+        acc = AccountController.getAccountByIdEmp(emp.getIdEmp());
+        txtUsername.setText(acc.getUsername());
+        if(acc.getRole().equals("User")){
+            panelManager.setVisible(false);
+            lbMessage.setText("Xin mời gọi món!");
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,86 +48,312 @@ public class Home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        qlNhanVien = new javax.swing.JMenuItem();
-        qlThucDon = new javax.swing.JMenuItem();
-        qlBan = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        jPanel2 = new javax.swing.JPanel();
+        panelSetting = new javax.swing.JPanel();
+        btnLogOut = new javax.swing.JButton();
+        btnChangePw = new javax.swing.JButton();
+        lbMessage = new javax.swing.JLabel();
+        btnGoiMon = new javax.swing.JButton();
+        panelManager = new javax.swing.JPanel();
+        btnEmpManager = new javax.swing.JButton();
+        btnAccManager = new javax.swing.JButton();
+        btnDishManager = new javax.swing.JButton();
+        btnTblManager = new javax.swing.JButton();
+        btnThuChi = new javax.swing.JButton();
+        btnBillManager = new javax.swing.JButton();
+        btnMaterialManager = new javax.swing.JButton();
+        btnEqipManager = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtUsername = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Quản lý nhà hàng");
+        setBackground(new java.awt.Color(204, 204, 255));
+        setPreferredSize(new java.awt.Dimension(1010, 900));
 
-        jMenuBar1.setBackground(new java.awt.Color(204, 204, 204));
-        jMenuBar1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
-        jMenu1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenu1.setText("Trang chủ ");
-        jMenuBar1.add(jMenu1);
+        panelSetting.setBackground(new java.awt.Color(153, 255, 204));
 
-        jMenu2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenu2.setText("Order");
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenu3.setText("Quản lý");
-
-        qlNhanVien.setText("Nhân viên");
-        qlNhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                qlNhanVienMouseClicked(evt);
-            }
-        });
-        qlNhanVien.addActionListener(new java.awt.event.ActionListener() {
+        btnLogOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Exit.png"))); // NOI18N
+        btnLogOut.setText("Đăng xuất");
+        btnLogOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                qlNhanVienActionPerformed(evt);
+                btnLogOutActionPerformed(evt);
             }
         });
-        jMenu3.add(qlNhanVien);
 
-        qlThucDon.setText("Thực đơn");
-        jMenu3.add(qlThucDon);
+        btnChangePw.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Edit.png"))); // NOI18N
+        btnChangePw.setText("Đổi mật khẩu");
+        btnChangePw.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangePwActionPerformed(evt);
+            }
+        });
 
-        qlBan.setText("Bàn");
-        jMenu3.add(qlBan);
+        javax.swing.GroupLayout panelSettingLayout = new javax.swing.GroupLayout(panelSetting);
+        panelSetting.setLayout(panelSettingLayout);
+        panelSettingLayout.setHorizontalGroup(
+            panelSettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnLogOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelSettingLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnChangePw, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        panelSettingLayout.setVerticalGroup(
+            panelSettingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSettingLayout.createSequentialGroup()
+                .addComponent(btnChangePw)
+                .addGap(18, 18, 18)
+                .addComponent(btnLogOut)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
-        jMenuBar1.add(jMenu3);
+        lbMessage.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
+        lbMessage.setForeground(new java.awt.Color(51, 153, 0));
+        lbMessage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Notes.png"))); // NOI18N
+        lbMessage.setText("Bạn đang đăng nhập với quyền quản lý.");
 
-        jMenu4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenu4.setText("Thống kê");
-        jMenuBar1.add(jMenu4);
+        btnGoiMon.setBackground(new java.awt.Color(255, 204, 255));
+        btnGoiMon.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnGoiMon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Add.png"))); // NOI18N
+        btnGoiMon.setText("Gọi món");
 
-        jMenu5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenu5.setText("Trợ giúp");
-        jMenuBar1.add(jMenu5);
+        panelManager.setBackground(new java.awt.Color(204, 204, 255));
 
-        setJMenuBar(jMenuBar1);
+        btnEmpManager.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnEmpManager.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Users.png"))); // NOI18N
+        btnEmpManager.setText("Quản lý nhân viên");
+        btnEmpManager.setPreferredSize(new java.awt.Dimension(250, 50));
+
+        btnAccManager.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnAccManager.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Unknown person.png"))); // NOI18N
+        btnAccManager.setText("Quản lý tài khoản");
+        btnAccManager.setPreferredSize(new java.awt.Dimension(250, 50));
+
+        btnDishManager.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnDishManager.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/monAn.jpg"))); // NOI18N
+        btnDishManager.setText("Quản lý món ăn");
+        btnDishManager.setPreferredSize(new java.awt.Dimension(250, 50));
+
+        btnTblManager.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnTblManager.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/banAn.jpg"))); // NOI18N
+        btnTblManager.setText("Quản lý bàn ăn");
+        btnTblManager.setPreferredSize(new java.awt.Dimension(250, 50));
+
+        btnThuChi.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnThuChi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Price list.png"))); // NOI18N
+        btnThuChi.setText("Quản lý thu chi");
+        btnThuChi.setPreferredSize(new java.awt.Dimension(250, 50));
+        btnThuChi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThuChiActionPerformed(evt);
+            }
+        });
+
+        btnBillManager.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnBillManager.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Task list.png"))); // NOI18N
+        btnBillManager.setText("Quản lý hóa đơn");
+        btnBillManager.setPreferredSize(new java.awt.Dimension(250, 50));
+        btnBillManager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBillManagerActionPerformed(evt);
+            }
+        });
+
+        btnMaterialManager.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnMaterialManager.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Open door.png"))); // NOI18N
+        btnMaterialManager.setText("Quản lý kho");
+        btnMaterialManager.setPreferredSize(new java.awt.Dimension(250, 50));
+
+        btnEqipManager.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnEqipManager.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/doDung.jpg"))); // NOI18N
+        btnEqipManager.setText("Quản lý đồ dùng");
+        btnEqipManager.setPreferredSize(new java.awt.Dimension(250, 50));
+        btnEqipManager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEqipManagerActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelManagerLayout = new javax.swing.GroupLayout(panelManager);
+        panelManager.setLayout(panelManagerLayout);
+        panelManagerLayout.setHorizontalGroup(
+            panelManagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelManagerLayout.createSequentialGroup()
+                .addGroup(panelManagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEmpManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAccManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTblManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMaterialManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                .addGroup(panelManagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnThuChi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEqipManager, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDishManager, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBillManager, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        panelManagerLayout.setVerticalGroup(
+            panelManagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelManagerLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(panelManagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEmpManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThuChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51)
+                .addGroup(panelManagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAccManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEqipManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
+                .addGroup(panelManagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTblManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDishManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
+                .addGroup(panelManagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMaterialManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBillManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/bg.jpg"))); // NOI18N
+
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+
+        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 30)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 51, 102));
+        jLabel1.setText("Nhà hàng Black Moon");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("Xin chào");
+
+        txtUsername.setFont(new java.awt.Font("Eras Light ITC", 1, 18)); // NOI18N
+        txtUsername.setForeground(new java.awt.Color(204, 0, 51));
+        txtUsername.setText("admin");
+        txtUsername.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtUsername.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtUsernameMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(26, 26, 26)
+                .addComponent(txtUsername)
+                .addGap(98, 98, 98))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtUsername))
+                .addGap(94, 94, 94))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(btnGoiMon, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(panelManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lbMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelSetting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(32, 32, 32))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panelSetting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(lbMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnGoiMon, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(100, 100, 100))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(panelManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(jLabel3)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 997, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 762, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void qlNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_qlNhanVienActionPerformed
-        // TODO add your handling code here:
-        EmployeeManager mn = new EmployeeManager();
-        mn.setVisible(true);
-    }//GEN-LAST:event_qlNhanVienActionPerformed
+    private void btnChangePwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePwActionPerformed
+        new ChangePassword(AccountController.getAccountByIdEmp(emp.getIdEmp()).getIdUser()).setVisible(true);
+    }//GEN-LAST:event_btnChangePwActionPerformed
 
-    private void qlNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_qlNhanVienMouseClicked
-        
-    }//GEN-LAST:event_qlNhanVienMouseClicked
+    private void txtUsernameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsernameMouseClicked
+        checkSetting = !checkSetting;
+        panelSetting.setVisible(checkSetting);
+    }//GEN-LAST:event_txtUsernameMouseClicked
+
+    private void btnBillManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBillManagerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBillManagerActionPerformed
+
+    private void btnThuChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThuChiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnThuChiActionPerformed
+
+    private void btnEqipManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEqipManagerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEqipManagerActionPerformed
+
+    private void btnLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutActionPerformed
+        new Login().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnLogOutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,7 +390,10 @@ public class Home extends javax.swing.JFrame {
         }else{
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
-                    new Home().setVisible(true);
+                    Home screen = new Home();
+                    
+
+                    screen.setVisible(true);
                 }
             });
         }
@@ -159,14 +401,25 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem qlBan;
-    private javax.swing.JMenuItem qlNhanVien;
-    private javax.swing.JMenuItem qlThucDon;
+    private javax.swing.JButton btnAccManager;
+    private javax.swing.JButton btnBillManager;
+    private javax.swing.JButton btnChangePw;
+    private javax.swing.JButton btnDishManager;
+    private javax.swing.JButton btnEmpManager;
+    private javax.swing.JButton btnEqipManager;
+    private javax.swing.JButton btnGoiMon;
+    private javax.swing.JButton btnLogOut;
+    private javax.swing.JButton btnMaterialManager;
+    private javax.swing.JButton btnTblManager;
+    private javax.swing.JButton btnThuChi;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lbMessage;
+    private javax.swing.JPanel panelManager;
+    private javax.swing.JPanel panelSetting;
+    private javax.swing.JLabel txtUsername;
     // End of variables declaration//GEN-END:variables
 }
