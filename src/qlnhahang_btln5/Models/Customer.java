@@ -25,6 +25,12 @@ public class Customer {
     public Customer() {
     }
 
+    public Customer(int idCus) {
+        this.idCus = idCus;
+    }
+    
+    
+
     public int getIdCus() {
         return idCus;
     }

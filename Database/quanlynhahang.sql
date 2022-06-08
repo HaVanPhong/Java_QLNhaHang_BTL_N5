@@ -36,16 +36,16 @@ CREATE TABLE Dish (
 CREATE TABLE Equipment (
   idEquip INT IDENTITY(1,1) PRIMARY KEY,
   name nvarchar(255) NOT NULL,
-  price money NOT NULL,
-  quantity INT NOT NULL
+  quantity INT NOT NULL,
+  note nvarchar(255)
 )
 CREATE TABLE Material (
   idMat INT IDENTITY(1,1) PRIMARY KEY,
   name nvarchar(255) NOT NULL,
-  quantity INT NOT NULL,
-  dataImport nvarchar(255) NOT NULL,
-  note nvarchar(255) NOT NULL
+  quantity float NOT NULL,
+  note nvarchar(255)
 )
+
 CREATE TABLE Tables (
   idTB INT IDENTITY(1,1) PRIMARY KEY,
   tbNumber INT NOT NULL,
@@ -54,20 +54,21 @@ CREATE TABLE Tables (
 
 CREATE TABLE Expense (
   idExp INT IDENTITY(1,1) PRIMARY KEY,
+  idEmp INT,
   createdAt Date NOT NULL DEFAULT GETDATE(),
-  idEmp INT NOT NULL,
   constraint fk_Expense_Employee foreign key(idEmp) references Employee(idEmp)
 )
 
 CREATE TABLE Expensedetail (
   idExpDetail INT IDENTITY(1,1) PRIMARY KEY,
-  quantity INT NOT NULL,
-  price money NOT NULL,
-  type nvarchar(20) NOT NULL,
   idExp INT NOT NULL,
-  id_type INT NOT NULL,
+  idType INT NOT NULL,
+  type nvarchar(20) NOT NULL,
+  quantity int NOT NULL,
+  price money NOT NULL,
   constraint fk_Expensedetail_Expense foreign key(idExp) references Expense(idExp)
 )
+
 CREATE TABLE Bill (
   idBill INT IDENTITY(1,1) PRIMARY KEY,
   idTb INT ,
@@ -94,9 +95,18 @@ insert into Employee values(N'Nguyễn văn dương','0328669614','6/7/2001',N'N
 insert into Account values('duong2k1','duong2k1','Quản lý',1);
 insert into Tables values(1)
 insert into Customer values (N'Nguyễn Bá Đông', '0123456789');
-insert into Bill(idTb, idCus, idEmp, total) values(1, 1, 1, 500);
 insert into Dish(name, price) values(N'pizza hải sản', 100000),
 									(N'khoai tây chiên', 20000) 
+
+insert into Customer values ('anonymous', '0000')
+
+
+insert into Material(name, quantity) values (N'Thịt lợn', 20),
+											(N'Cần tây', 10)
+
+insert into Equipment(name, quantity) values(N'Bàn', 10),
+											(N'Ghế', 10)
+
 
 select * from Employee
 
@@ -109,3 +119,7 @@ select * from Customer
 select * from Bill
 
 select * from Dish
+
+
+select * from Billdetail
+
