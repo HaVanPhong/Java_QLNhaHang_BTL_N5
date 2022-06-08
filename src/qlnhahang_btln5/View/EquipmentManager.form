@@ -127,9 +127,9 @@
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtfullname" alignment="0" min="-2" pref="214" max="-2" attributes="0"/>
-                                      <Component id="txtPhone" alignment="0" min="-2" pref="214" max="-2" attributes="0"/>
-                                      <Component id="txtBirthDay" alignment="0" min="-2" pref="214" max="-2" attributes="0"/>
+                                      <Component id="txtName" alignment="0" min="-2" pref="214" max="-2" attributes="0"/>
+                                      <Component id="txtQuantity" alignment="0" min="-2" pref="214" max="-2" attributes="0"/>
+                                      <Component id="txtNote" alignment="0" min="-2" pref="214" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -144,17 +144,17 @@
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="txtfullname" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtName" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel4" alignment="0" min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="txtPhone" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtQuantity" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel5" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="txtBirthDay" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNote" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -196,9 +196,9 @@
                 <Property name="text" type="java.lang.String" value="Ghi ch&#xfa;: "/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtfullname">
+            <Component class="javax.swing.JTextField" name="txtName">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtfullnameActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNameActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnAdd">
@@ -245,14 +245,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRefeshActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtPhone">
+            <Component class="javax.swing.JTextField" name="txtQuantity">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPhoneActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtQuantityActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtBirthDay">
+            <Component class="javax.swing.JTextField" name="txtNote">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBirthDayActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNoteActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
