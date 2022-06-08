@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package qlnhahang_btln5.View;
-
 import qlnhahang_btln5.Controller.EquipmentController;
 import qlnhahang_btln5.Models.Dish;
 import qlnhahang_btln5.Models.Equipment;
@@ -12,34 +11,31 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  *
  * @author Admin
  */
 public class EquipmentManager extends javax.swing.JFrame {
     DefaultTableModel model = null;
-    String [] Title = {"STT","ID","Tên thiết bị","Giá", "Số lượng "};
+    String [] Title = {"STT","ID","Tên thiết bị","Số lượng", "Ghi chú "};
     static List<Equipment> list = new ArrayList<>();
-
     /**
      * Creates new form EquipmentManager
      */
     public EquipmentManager() {
-
         initComponents();
         model = (DefaultTableModel) tbQLEquip.getModel();
         model.setColumnIdentifiers(Title);
         showTable();
     }
     public void showTable(){
-        list = EquipmentController.index();
+        list = EquipmentController.readAllRecord();
         System.out.println(list.size());
         model.setRowCount(0);
         int stt = 1;
         for(Equipment equip : list){
             model.addRow(new Object[]{
-                    stt++, equip.getIdEquip(), equip.getName(), equip.getPrice(), equip.getQuantity()
+                    stt++, equip.getIdEquip(), equip.getName(), equip.getQuantity(), equip.getNote()
             });
         }
     }
@@ -55,15 +51,16 @@ public class EquipmentManager extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        txtfullname = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        lable = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
-        txtPrice = new javax.swing.JTextField();
-        txtQuantity = new javax.swing.JTextField();
+        btnRefesh = new javax.swing.JButton();
+        txtPhone = new javax.swing.JTextField();
+        txtBirthDay = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbQLEquip = new javax.swing.JTable();
         txtSearch = new javax.swing.JTextField();
@@ -77,11 +74,20 @@ public class EquipmentManager extends javax.swing.JFrame {
 
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText("Tên: ");
+
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setText("Tên thiết bị: ");
+        jLabel4.setText("Số lượng :");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setText("Giá:");
+        jLabel5.setText("Ghi chú: ");
+
+        txtfullname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtfullnameActionPerformed(evt);
+            }
+        });
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Create.png"))); // NOI18N
         btnAdd.setText("Thêm");
@@ -107,24 +113,23 @@ public class EquipmentManager extends javax.swing.JFrame {
             }
         });
 
-        lable.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lable.setText("Số lượng: ");
-
-        txtName.addActionListener(new java.awt.event.ActionListener() {
+        btnRefesh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Refresh.png"))); // NOI18N
+        btnRefesh.setText("Làm mới");
+        btnRefesh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNameActionPerformed(evt);
+                btnRefeshActionPerformed(evt);
             }
         });
 
-        txtPrice.addActionListener(new java.awt.event.ActionListener() {
+        txtPhone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPriceActionPerformed(evt);
+                txtPhoneActionPerformed(evt);
             }
         });
 
-        txtQuantity.addActionListener(new java.awt.event.ActionListener() {
+        txtBirthDay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtQuantityActionPerformed(evt);
+                txtBirthDayActionPerformed(evt);
             }
         });
 
@@ -135,43 +140,51 @@ public class EquipmentManager extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lable)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnAdd, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnEdit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))))
                     .addComponent(jLabel5)
-                    .addComponent(jLabel4))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(51, 51, 51)
+                            .addComponent(btnRefesh, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(51, 51, 51)
+                            .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel1))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtfullname, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtBirthDay, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtfullname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                    .addComponent(txtBirthDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(71, 71, 71)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lable, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
-                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(230, Short.MAX_VALUE))
+                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRefesh, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(262, Short.MAX_VALUE))
         );
 
         tbQLEquip.setModel(new javax.swing.table.DefaultTableModel(
@@ -226,7 +239,7 @@ public class EquipmentManager extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
                         .addGap(17, 17, 17))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -261,27 +274,33 @@ public class EquipmentManager extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtfullnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfullnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtfullnameActionPerformed
+
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         try {
 
-            String name = txtName.getText();
-            Double price = Double.parseDouble(txtPrice.getText());
-            int quantity = Integer.parseInt(txtQuantity.getText());
-            Equipment equip = new Equipment(name, price, quantity);
-            if(EquipmentController.store(equip)){
+            String fullname = txtfullname.getText();
+            String phone = txtPhone.getText();
+            String birthDay = txtBirthDay.getText();
+            String gender = (rdoMale.isSelected() == true) ? "Nam" : "Nữ";
+            String address = txtAddress.getText();
+            String position = cbbPositon.getSelectedItem().toString();
+            float salary = Float.parseFloat(txtSalary.getText());
+            Employee newEmp = new Employee(fullname, phone, gender, birthDay, salary, address, position);
+            if(EmployeeController.CreateEmployee(newEmp)){
                 System.out.println("Thêm thành công!");
-                ClearForm();
-                showTable();
             }else{
                 System.out.println("Thêm thất bại!!");
             }
-
 
         } catch (Exception e) {
             System.out.println("Vui lòng nhập đầy đủ");
@@ -292,16 +311,18 @@ public class EquipmentManager extends javax.swing.JFrame {
         try {
             int row = tbQLEquip.getSelectedRow();
             if(row>=0){
-                int idEquip = Integer.parseInt(model.getValueAt(row,1).toString());
-                System.out.println("idEmp : "+idEquip);
-                String name = txtName.getText();
-                Double price = Double.parseDouble(txtPrice.getText());
-                int quantity = Integer.parseInt(txtQuantity.getText());
-                Equipment equipment = new Equipment(idEquip, name, price, quantity);
-                if(EquipmentController.update(equipment)){
+                int idEmp = Integer.parseInt(model.getValueAt(row,1).toString());
+                System.out.println("idEmp : "+idEmp);
+                String fullname = txtfullname.getText();
+                String phone = txtPhone.getText();
+                String birthDay = txtBirthDay.getText();
+                String gender = (rdoMale.isSelected() == true) ? "Nam" : "Nữ";
+                String address = txtAddress.getText();
+                String position = cbbPositon.getSelectedItem().toString();
+                float salary = Float.parseFloat(txtSalary.getText());
+                Employee UpdateEmp = new Employee(idEmp,fullname, phone, gender, birthDay, salary, address, position);
+                if(EmployeeController.UpdateEmployee(UpdateEmp)){
                     JOptionPane.showMessageDialog(rootPane, "Update thành công");
-                    ClearForm();
-                    showTable();
                 }else{
                     JOptionPane.showMessageDialog(rootPane, "Update thất bại");
                 }
@@ -315,26 +336,26 @@ public class EquipmentManager extends javax.swing.JFrame {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int row = tbQLEquip.getSelectedRow();
         if(row >= 0){
-            if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn xóa ?","Admin",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
-                int idEquip = Integer.parseInt(model.getValueAt(row,1).toString());
-                EquipmentController.delete(idEquip);
+            if(JOptionPane.showConfirmDialog(rootPane, "Thông báo","Admin",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                int idEmp = Integer.parseInt(model.getValueAt(row,1).toString());
+                EmployeeController.DeleteEmployee(idEmp);
                 ClearForm();
-                showTable();
             }
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
-    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNameActionPerformed
+    private void btnRefeshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefeshActionPerformed
 
-    private void txtPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPriceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPriceActionPerformed
+        ShowTable();
+    }//GEN-LAST:event_btnRefeshActionPerformed
 
-    private void txtQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantityActionPerformed
+    private void txtPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPhoneActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtQuantityActionPerformed
+    }//GEN-LAST:event_txtPhoneActionPerformed
+
+    private void txtBirthDayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBirthDayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBirthDayActionPerformed
 
     private void tbQLEquipAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tbQLEquipAncestorAdded
 
@@ -342,20 +363,28 @@ public class EquipmentManager extends javax.swing.JFrame {
 
     private void tbQLEquipMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLEquipMouseClicked
         int row = tbQLEquip.getSelectedRow();
-        txtName.setText(model.getValueAt(row,2).toString());
-        txtPrice.setText(model.getValueAt(row,3).toString());
-        txtQuantity.setText(model.getValueAt(row,4).toString());
+        txtfullname.setText(model.getValueAt(row,2).toString());
+        txtPhone.setText(model.getValueAt(row,3).toString());
+        txtBirthDay.setText(model.getValueAt(row,4).toString());
+        if(model.getValueAt(row,5).toString().equals("Nam")){
+            rdoMale.setSelected(true);
+        }else{
+            rdoFemale.setSelected(true);
+        }
+        txtSalary.setText(model.getValueAt(row,6).toString());
+        txtAddress.setText(model.getValueAt(row,7).toString());
+        cbbPositon.setSelectedItem(model.getValueAt(row,8));
 
     }//GEN-LAST:event_tbQLEquipMouseClicked
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 
-        list = EquipmentController.search(txtSearch.getText());
+        listEmp = EmployeeController.SearchEmployee(txtSearch.getText());
         model.setRowCount(0);
         int stt = 1 ;
-        for (Equipment equip : list) {
+        for (Employee emp : listEmp) {
             model.addRow(new Object[]{
-                stt++,equip.getIdEquip(),equip.getName(),equip.getPrice(),equip.getQuantity()
+                stt++,emp.getIdEmp(),emp.getFullname(),emp.getPhone(),emp.getGender(),emp.getBirthday(),emp.getSalary(),emp.getAddress(),emp.getPosition()
             });
         }
     }//GEN-LAST:event_btnSearchActionPerformed
@@ -365,13 +394,6 @@ public class EquipmentManager extends javax.swing.JFrame {
         this.dispose();
         home.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    public  void ClearForm(){
-        txtName.setText("");
-        txtName.requestFocus();
-        txtPrice.setText("");
-        txtQuantity.setText("");
-    }
 
     /**
      * @param args the command line arguments
@@ -412,18 +434,19 @@ public class EquipmentManager extends javax.swing.JFrame {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnRefesh;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lable;
     private javax.swing.JTable tbQLEquip;
-    private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPrice;
-    private javax.swing.JTextField txtQuantity;
+    private javax.swing.JTextField txtBirthDay;
+    private javax.swing.JTextField txtPhone;
     private javax.swing.JTextField txtSearch;
+    private javax.swing.JTextField txtfullname;
     // End of variables declaration//GEN-END:variables
 }
