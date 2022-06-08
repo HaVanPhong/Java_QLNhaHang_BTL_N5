@@ -38,7 +38,17 @@ public class OrderManager extends javax.swing.JFrame {
     List<Tables> tables;
     DefaultTableModel modelThucDon=null;
     DefaultTableModel modelMonDaGoi= null;
-    List<Ordering> listOrderingOfTable= new ArrayList<>();
+    public static List<Ordering> listOrderingOfTable= new ArrayList<>();
+
+    public static List<Ordering> getListOrderingOfTable() {
+        return listOrderingOfTable;
+    }
+
+    public static void setListOrderingOfTable(List<Ordering> listOrderingOfTable) {
+        OrderManager.listOrderingOfTable = listOrderingOfTable;
+    }
+    
+    
     
     public static int currentTableNumber=1;
     public OrderManager() {
