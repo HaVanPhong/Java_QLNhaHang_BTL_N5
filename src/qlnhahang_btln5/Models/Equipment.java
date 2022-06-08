@@ -22,6 +22,11 @@ public class Equipment{
         this.note = note;
     }
 
+    public Equipment(String name, double price, int quantity){
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
     public Equipment() {
     }
 
