@@ -22,6 +22,10 @@ public class Account{
         this.role = role;
         this.idEmp = idEmp;
     }
+    public Account(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     public int getIdEmp() {
         return idEmp;
