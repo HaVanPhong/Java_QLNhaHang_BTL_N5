@@ -3,4 +3,4 @@
 nbproject/
 .idea/
 out/
-SQLServerConnection.java
+src/qlnhahang_btln5/Controller/SQLServerConnection.java
