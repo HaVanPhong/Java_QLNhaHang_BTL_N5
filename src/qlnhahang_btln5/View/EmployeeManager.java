@@ -74,6 +74,7 @@ public class EmployeeManager extends javax.swing.JFrame {
         lable = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
         txtSalary = new javax.swing.JTextField();
+        txtBirthday = new com.toedter.calendar.JDateChooser();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbQlEmp = new javax.swing.JTable();
         txtSearch = new javax.swing.JTextField();
@@ -173,6 +174,8 @@ public class EmployeeManager extends javax.swing.JFrame {
             }
         });
 
+        txtBirthday.setDateFormatString("dd/MM/yyyy");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -214,7 +217,8 @@ public class EmployeeManager extends javax.swing.JFrame {
                                                     .addComponent(txtfullname, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
                                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
                                                     .addComponent(txtPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
-                                                    .addComponent(txtSalary, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE))
+                                                    .addComponent(txtSalary, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                                                    .addComponent(txtBirthday, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                                 .addGap(0, 0, Short.MAX_VALUE)))))))
                         .addContainerGap(52, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -236,7 +240,9 @@ public class EmployeeManager extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -614,6 +620,10 @@ public class EmployeeManager extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdoMale;
     private javax.swing.JTable tbQlEmp;
     private javax.swing.JTextArea txtAddress;
+<<<<<<< HEAD
+=======
+    private com.toedter.calendar.JDateChooser txtBirthday;
+>>>>>>> 8dd9023 (fix-conflict)
     private javax.swing.JTextField txtPhone;
     private javax.swing.JTextField txtSalary;
     private javax.swing.JTextField txtSearch;

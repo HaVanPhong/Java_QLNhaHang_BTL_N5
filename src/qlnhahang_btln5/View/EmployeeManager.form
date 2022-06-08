@@ -157,6 +157,10 @@
                                                           <Component id="jScrollPane1" alignment="0" pref="214" max="32767" attributes="0"/>
                                                           <Component id="txtPhone" alignment="0" pref="214" max="32767" attributes="0"/>
                                                           <Component id="txtSalary" alignment="0" pref="214" max="32767" attributes="0"/>
+<<<<<<< HEAD
+=======
+                                                          <Component id="txtBirthday" alignment="0" max="32767" attributes="0"/>
+>>>>>>> 8dd9023 (fix-conflict)
                                                       </Group>
                                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                                   </Group>
@@ -193,7 +197,14 @@
                           <Component id="txtPhone" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+<<<<<<< HEAD
                       <Component id="jLabel5" min="-2" pref="27" max="-2" attributes="0"/>
+=======
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jLabel5" min="-2" pref="27" max="-2" attributes="0"/>
+                          <Component id="txtBirthday" min="-2" max="-2" attributes="0"/>
+                      </Group>
+>>>>>>> 8dd9023 (fix-conflict)
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel6" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
@@ -398,6 +409,11 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSalaryActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="txtBirthday">
+              <Properties>
+                <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
