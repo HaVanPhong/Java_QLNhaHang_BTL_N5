@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 import java.util.List;
 import javafx.collections.ObservableList;
 import javax.swing.table.DefaultTableModel;
+import qlnhahang_btln5.Controller.AccountController;
 import qlnhahang_btln5.Controller.BillController;
 import qlnhahang_btln5.Controller.CustomerController;
 import qlnhahang_btln5.Controller.MaterialController;
@@ -19,6 +20,7 @@ import qlnhahang_btln5.Controller.EquipmentController;
 import qlnhahang_btln5.Controller.ExpenseController;
 import qlnhahang_btln5.Controller.MaterialController;
 import qlnhahang_btln5.Controller.TableController;
+import qlnhahang_btln5.Models.Account;
 import qlnhahang_btln5.Models.Bill;
 import qlnhahang_btln5.Models.Material;
 import qlnhahang_btln5.Models.Equipment;
@@ -46,6 +48,7 @@ public class CreateExpense extends javax.swing.JFrame {
     static List<Equipment> listEquipment = new ArrayList<>();
     static List<ExpenseDetail> listDetail = new ArrayList<>();
     static List<Employee> listEmployee = new ArrayList<>();
+    static Account acc = null;
 
     class ComboItem
     {
@@ -80,6 +83,29 @@ public class CreateExpense extends javax.swing.JFrame {
      */
     public CreateExpense() {
         initComponents();
+        modelMaterial =  (DefaultTableModel) tbMaterial.getModel();
+        modelEquipment = (DefaultTableModel) tbEquipment.getModel();        
+        modelDetail =  (DefaultTableModel) tbDetail.getModel();
+
+        modelMaterial.setColumnIdentifiers(titleMaterial);
+        modelEquipment.setColumnIdentifiers(titleEquipment);
+        modelDetail.setColumnIdentifiers(titleDetail);
+
+        listEmployee = EmployeeController.GetAllEmployee();
+
+        cbbEmployee.removeAllItems();
+        cbbEmployee.addItem(new ComboItem("Không xác định", -1));
+        for(Employee employee : listEmployee) {
+            cbbEmployee.addItem(new ComboItem(employee.getFullname(), employee.getIdEmp()));
+        }
+        
+        showTableMaterial();
+        showTableEquipment();
+    }
+    public CreateExpense(int idUser) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        acc = AccountController.getAccountByIdUser(idUser);
         modelMaterial =  (DefaultTableModel) tbMaterial.getModel();
         modelEquipment = (DefaultTableModel) tbEquipment.getModel();        
         modelDetail =  (DefaultTableModel) tbDetail.getModel();
@@ -151,7 +177,7 @@ public class CreateExpense extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnComeback = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbMaterial = new javax.swing.JTable();
@@ -193,15 +219,15 @@ public class CreateExpense extends javax.swing.JFrame {
         msgExpense = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Quản lý nhân viên");
+        setTitle("Tạo biên lai");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Exit.png"))); // NOI18N
-        jButton2.setText("Quay lại");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnComeback.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Exit.png"))); // NOI18N
+        btnComeback.setText("Quay lại");
+        btnComeback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnComebackActionPerformed(evt);
             }
         });
 
@@ -533,7 +559,7 @@ public class CreateExpense extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnComeback, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(138, 138, 138)
                         .addComponent(jLabel1)
@@ -550,7 +576,7 @@ public class CreateExpense extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnComeback, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1018,11 +1044,11 @@ public class CreateExpense extends javax.swing.JFrame {
         txtMaterialQty.setValue(1);
     }//GEN-LAST:event_tbMaterialMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ManagerExpense managerExpense = new ManagerExpense();
+    private void btnComebackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComebackActionPerformed
+        ManagerExpense managerExpense = new ManagerExpense(acc.getIdUser());
         this.dispose();
         managerExpense.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnComebackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1068,6 +1094,7 @@ public class CreateExpense extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddMaterial;
+    private javax.swing.JButton btnComeback;
     private javax.swing.JButton btnEquipmentAdd;
     private javax.swing.JButton btnEquipmentUpdate;
     private javax.swing.JButton btnExpenseAdd;
@@ -1078,7 +1105,6 @@ public class CreateExpense extends javax.swing.JFrame {
     private javax.swing.JLabel errEquipment;
     private javax.swing.JLabel errExpense;
     private javax.swing.JLabel errMaterial;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel15;

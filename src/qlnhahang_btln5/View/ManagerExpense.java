@@ -11,10 +11,13 @@ import java.util.List;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import qlnhahang_btln5.Controller.AccountController;
 import qlnhahang_btln5.Controller.ExpenseController;
+import qlnhahang_btln5.Models.Account;
 import qlnhahang_btln5.Models.Expense;
 import qlnhahang_btln5.Models.Expense;
 import qlnhahang_btln5.Models.ExpenseDetail;
+import static qlnhahang_btln5.View.AccountManager.acc;
 
 /**
  *
@@ -22,6 +25,7 @@ import qlnhahang_btln5.Models.ExpenseDetail;
  */
 public class ManagerExpense extends javax.swing.JFrame {
     DefaultTableModel model = null;
+    static Account acc = null;
     String [] Tile = {"STT","Mã biên lai","Nhân viên thực hiện","Ngày nhập","Tổng thanh toán"};
     static List<Expense> listExpense = new ArrayList<>();
     Date from = null;
@@ -32,6 +36,14 @@ public class ManagerExpense extends javax.swing.JFrame {
      */
     public ManagerExpense() {
         initComponents();
+        model =  (DefaultTableModel) tbExpense.getModel();
+        model.setColumnIdentifiers(Tile);
+        ShowTable();
+    }
+    public ManagerExpense(int idUser) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        acc = AccountController.getAccountByIdUser(idUser);
         model =  (DefaultTableModel) tbExpense.getModel();
         model.setColumnIdentifiers(Tile);
         ShowTable();
@@ -79,7 +91,7 @@ public class ManagerExpense extends javax.swing.JFrame {
         txtDateTo = new org.jdesktop.swingx.JXDatePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Quản lý nhân viên");
+        setTitle("Quản lý thu chi");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -102,8 +114,9 @@ public class ManagerExpense extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Home.png"))); // NOI18N
-        jButton2.setText("Home");
+        jButton2.setText("Trang chủ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -113,6 +126,11 @@ public class ManagerExpense extends javax.swing.JFrame {
         jLabel1.setText("Từ ngày");
 
         txtDateFrom.setFormats(new SimpleDateFormat("dd/MM/yyyy"));
+        txtDateFrom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDateFromActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Đến ngày");
 
@@ -172,7 +190,7 @@ public class ManagerExpense extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -242,14 +260,14 @@ public class ManagerExpense extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Home home = new Home();
+        Home home = new Home(acc.getIdUser());
         this.dispose();
         home.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        CreateExpense createExpense = new CreateExpense();
+        CreateExpense createExpense = new CreateExpense(acc.getIdUser());
         createExpense.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAddActionPerformed
@@ -280,7 +298,7 @@ public class ManagerExpense extends javax.swing.JFrame {
         }
         
         UpdateExpense.expense = exp;
-        UpdateExpense updateExpense = new UpdateExpense();
+        UpdateExpense updateExpense = new UpdateExpense(acc.getIdUser());
         updateExpense.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnUpdateMouseClicked
@@ -294,7 +312,7 @@ public class ManagerExpense extends javax.swing.JFrame {
         }
         int idExpense = (int)tbExpense.getValueAt(row, 1);
         Expense expense = ExpenseController.getExpense(idExpense);
-        if(JOptionPane.showConfirmDialog(rootPane, "Thông báo","Admin",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+        if(JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn xóa bản ghi này?","Admin",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
             ExpenseController.deleteExpense(idExpense);
             ShowTable();
         }
@@ -306,6 +324,10 @@ public class ManagerExpense extends javax.swing.JFrame {
         to = txtDateTo.getDate();
         ShowTable();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtDateFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateFromActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDateFromActionPerformed
 
     /**
      * @param args the command line arguments

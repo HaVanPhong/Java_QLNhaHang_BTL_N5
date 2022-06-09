@@ -30,11 +30,20 @@ public class AccountManager extends javax.swing.JFrame {
     String [] TileAcc = {"STT","Mã tài khoản","Mã nhân viên","Họ tên","Chức vụ","Tài khoản","Quyền"};
     String [] Tile = {"STT","Mã nhân viên","Họ tên","Chức vụ"};
     static ArrayList<Employee> listEmp = new ArrayList<>();
+    static Account acc = null;
     /**
      * Creates new form ManagerEmployee
      */
     public AccountManager() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        model =  (DefaultTableModel) tbQlAccount.getModel();
+        ShowTableEmpAcc();
+    }
+    public AccountManager(int idUser) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        acc = AccountController.getAccountByIdUser(idUser);
         model =  (DefaultTableModel) tbQlAccount.getModel();
         ShowTableEmpAcc();
     }
@@ -393,7 +402,7 @@ public class AccountManager extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
-        Home home = new Home();
+        Home home = new Home(acc.getIdUser());
         this.dispose();
         home.setVisible(true);
     }//GEN-LAST:event_btnHomeActionPerformed
@@ -452,6 +461,8 @@ public class AccountManager extends javax.swing.JFrame {
                 }
                 
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Bạn chưa chọn bản ghi nào", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -486,6 +497,8 @@ public class AccountManager extends javax.swing.JFrame {
                         }
                     }
                 }
+            }else{
+                JOptionPane.showMessageDialog(null, "Bạn chưa chọn bản ghi nào", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (Exception e) {

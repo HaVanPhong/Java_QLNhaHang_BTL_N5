@@ -11,11 +11,13 @@ import java.util.regex.Pattern;
 import java.util.List;
 import javafx.collections.ObservableList;
 import javax.swing.table.DefaultTableModel;
+import qlnhahang_btln5.Controller.AccountController;
 import qlnhahang_btln5.Controller.BillController;
 import qlnhahang_btln5.Controller.CustomerController;
 import qlnhahang_btln5.Controller.DishController;
 import qlnhahang_btln5.Controller.EmployeeController;
 import qlnhahang_btln5.Controller.TableController;
+import qlnhahang_btln5.Models.Account;
 import qlnhahang_btln5.Models.Bill;
 import qlnhahang_btln5.Models.Dish;
 import qlnhahang_btln5.Models.BillDetail;
@@ -39,6 +41,7 @@ public class CreateBill extends javax.swing.JFrame {
     static List<Customer> listCustomer = new ArrayList<>();
     static List<Employee> listEmployee = new ArrayList<>();
     static List<Tables> listTable = new ArrayList<>();
+    static Account acc = null;
 
 
     class ComboItem
@@ -74,6 +77,40 @@ public class CreateBill extends javax.swing.JFrame {
      */
     public CreateBill() {
         initComponents();
+        modelDish =  (DefaultTableModel) tbDish.getModel();        
+        modelDetail =  (DefaultTableModel) tbDetail.getModel();
+
+        modelDish.setColumnIdentifiers(titleDish);        
+        modelDetail.setColumnIdentifiers(titleDetail);
+
+        listDish = DishController.index();
+        listCustomer = CustomerController.getAllCustomer();
+        listEmployee = EmployeeController.GetAllEmployee();
+        listTable = TableController.readAllTables();
+
+        cbbCustomer.removeAllItems();
+        cbbCustomer.addItem(new ComboItem("Không xác định", -1));
+        for(Customer customer : listCustomer) {
+            cbbCustomer.addItem(new ComboItem(customer.getFullname(), customer.getIdCus()));
+        }
+        
+        cbbEmployee.removeAllItems();
+        cbbEmployee.addItem(new ComboItem("Không xác định", -1));
+        for(Employee employee : listEmployee) {
+            cbbEmployee.addItem(new ComboItem(employee.getFullname(), employee.getIdEmp()));
+        }
+        
+        cbbTable.removeAllItems();
+        cbbTable.addItem(new ComboItem("Không xác định", -1));
+        for(Tables table : listTable) {
+            cbbTable.addItem(new ComboItem(table.getTbName(), table.getIdTB()));
+        }
+        showTableDish();
+    }
+    public CreateBill(int idUser) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        acc = AccountController.getAccountByIdUser(idUser);
         modelDish =  (DefaultTableModel) tbDish.getModel();        
         modelDetail =  (DefaultTableModel) tbDetail.getModel();
 
@@ -148,7 +185,7 @@ public class CreateBill extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        btnComeback = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbDish = new javax.swing.JTable();
@@ -187,15 +224,15 @@ public class CreateBill extends javax.swing.JFrame {
         msgBill = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Quản lý nhân viên");
+        setTitle("Tạo hóa đơn");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Exit.png"))); // NOI18N
-        jButton2.setText("Quay lại");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnComeback.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Exit.png"))); // NOI18N
+        btnComeback.setText("Quay lại");
+        btnComeback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnComebackActionPerformed(evt);
             }
         });
 
@@ -413,7 +450,7 @@ public class CreateBill extends javax.swing.JFrame {
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnComeback, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(59, 59, 59)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -484,7 +521,7 @@ public class CreateBill extends javax.swing.JFrame {
                                             .addGroup(jPanel2Layout.createSequentialGroup()
                                                 .addGap(81, 81, 81)
                                                 .addComponent(btnBillRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE))))
+                                                .addGap(0, 101, Short.MAX_VALUE))))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGap(53, 53, 53)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -497,7 +534,7 @@ public class CreateBill extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnComeback, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
@@ -581,11 +618,11 @@ public class CreateBill extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDishPriceActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ManagerBill managerBill = new ManagerBill();
+    private void btnComebackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComebackActionPerformed
+        ManagerBill managerBill = new ManagerBill(acc.getIdUser());
         this.dispose();
         managerBill.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnComebackActionPerformed
 
     private void btnDishAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDishAddActionPerformed
         // TODO add your handling code here:
@@ -833,6 +870,7 @@ public class CreateBill extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBillAdd;
     private javax.swing.JButton btnBillRefresh;
+    private javax.swing.JButton btnComeback;
     private javax.swing.JButton btnDishAdd;
     private javax.swing.JButton btnDishUpdate;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -841,7 +879,6 @@ public class CreateBill extends javax.swing.JFrame {
     private javax.swing.JComboBox cbbTable;
     private javax.swing.JLabel errBill;
     private javax.swing.JLabel errDishQty;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

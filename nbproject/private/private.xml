@@ -3,15 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/JAVA.INCLASS/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/View/Login.java</file>
-            <file>file:/D:/JAVA.INCLASS/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/View/EmployeeManager.java</file>
-            <file>file:/D:/JAVA.INCLASS/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/Models/Dish.java</file>
-            <file>file:/D:/JAVA.INCLASS/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/Controller/DishController.java</file>
-            <file>file:/D:/JAVA.INCLASS/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/View/DishManager.java</file>
-            <file>file:/D:/JAVA.INCLASS/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/Controller/EquipmentController.java</file>
-            <file>file:/D:/JAVA.INCLASS/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/View/EquipmentManager.java</file>
-            <file>file:/D:/JAVA.INCLASS/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/Controller/SQLServerConnection.java</file>
-            <file>file:/D:/JAVA.INCLASS/BTL/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/Models/Equipment.java</file>
+            <file>file:/D:/JavaProject/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/View/Login.java</file>
+            <file>file:/D:/JavaProject/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/View/OrderManager.java</file>
+            <file>file:/D:/JavaProject/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/View/TableItem.java</file>
+            <file>file:/D:/JavaProject/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/View/UpdateExpense.java</file>
+            <file>file:/D:/JavaProject/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/View/EmployeeManager.java</file>
+            <file>file:/D:/JavaProject/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/View/ListTable.java</file>
+            <file>file:/D:/JavaProject/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/Controller/AccountController.java</file>
+            <file>file:/D:/JavaProject/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/View/AccountManager.java</file>
+            <file>file:/D:/JavaProject/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/QLNhaHang_BTLN5.java</file>
+            <file>file:/D:/JavaProject/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/View/Home.java</file>
+            <file>file:/D:/JavaProject/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/View/ChangePassword.java</file>
+            <file>file:/D:/JavaProject/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/View/ManagerExpense.java</file>
+            <file>file:/D:/JavaProject/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/View/TableManager.java</file>
+            <file>file:/D:/JavaProject/Java_QLNhaHang_BTL_N5/src/qlnhahang_btln5/View/ManagerBill.java</file>
         </group>
     </open-files>
 </project-private>
