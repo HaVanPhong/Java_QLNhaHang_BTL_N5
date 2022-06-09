@@ -7,8 +7,11 @@ package qlnhahang_btln5.View;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
@@ -65,7 +68,11 @@ public class OrderManager extends javax.swing.JFrame {
         modelThucDon= (DefaultTableModel) tbThucDon.getModel();
         modelMonDaGoi= (DefaultTableModel) tbMonDaGoi.getModel();
         
-        tables= TableController.readAllTables();
+        try {
+            tables= TableController.readAllTables();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Không lấy được dữ liệu bàn ăn", "Lỗi truy vấn dữ liệu", JOptionPane.ERROR_MESSAGE);
+        }
         dishs= DishController.index();
         
         for (Dish dish: dishs){
@@ -224,6 +231,7 @@ public class OrderManager extends javax.swing.JFrame {
                 "id", "Tên món ăn", "Giá bán"
             }
         ));
+        tbThucDon.setRowHeight(24);
         tbThucDon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbThucDonMouseClicked(evt);
@@ -263,6 +271,7 @@ public class OrderManager extends javax.swing.JFrame {
                 "Tên món", "Giá", "Số lượng", "Thành tiền"
             }
         ));
+        tbMonDaGoi.setRowHeight(24);
         jScrollPane3.setViewportView(tbMonDaGoi);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -478,6 +487,10 @@ public class OrderManager extends javax.swing.JFrame {
 
     private void btnGoiMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoiMonActionPerformed
         try {
+            int row = tbThucDon.getSelectedRow();
+            if (row<0){
+                throw new Exception("Bạn chưa chọn món nào");
+            }
             String tenMon= edtTenMon.getText().trim();
             double gia= Double.parseDouble(edtGiaBan.getText().trim());
             int soLuong= Integer.parseInt(spnSoLuong.getValue().toString());
@@ -505,7 +518,7 @@ public class OrderManager extends javax.swing.JFrame {
             edtTongTien.setText(Double.parseDouble(edtTongTien.getText().trim())+ dishOrder.getMoney()+"");
             lbCurrentStt.setText("Đang phục vụ");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, "Hãy chọn món");
+            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Lỗi thao tác", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnGoiMonActionPerformed
 
@@ -564,7 +577,7 @@ public class OrderManager extends javax.swing.JFrame {
             }           
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Lỗi thao tác", JOptionPane.WARNING_MESSAGE);
         }
         
     }//GEN-LAST:event_btnThanhToanActionPerformed

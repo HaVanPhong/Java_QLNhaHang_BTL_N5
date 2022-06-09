@@ -123,3 +123,4 @@ select * from Dish
 
 select * from Billdetail
 
+select * from Material

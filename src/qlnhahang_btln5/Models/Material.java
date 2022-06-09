@@ -12,10 +12,10 @@ package qlnhahang_btln5.Models;
 public class Material{
     private int idMat;
     private String name;
-    private float quantity;
+    private int quantity;
     private String note;
 
-    public Material(int idMat, String name, float quantity, String note) {
+    public Material(int idMat, String name, int quantity, String note) {
         this.idMat = idMat;
         this.name = name;
         this.quantity = quantity;
@@ -41,11 +41,11 @@ public class Material{
         this.name = name;
     }
 
-    public float getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(float quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 

@@ -12,6 +12,7 @@ import qlnhahang_btln5.Models.Dish;
  * @author HaPhong
  */
 public class DishOrder extends Dish{
+    
     private int quantity;
     
     public double getMoney(){

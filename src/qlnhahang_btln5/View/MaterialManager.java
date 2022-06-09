@@ -5,6 +5,7 @@
  */
 package qlnhahang_btln5.View;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -30,12 +31,10 @@ public class MaterialManager extends javax.swing.JFrame {
         materials= MaterialController.readAllRecord();
         for (Material mat: materials){
             model.addRow(new Object[]{
-                mat.getIdMat(), mat.getName(), mat.getQuantity(),mat.getNote()
+                mat.getIdMat(), mat.getName(), mat.getQuantity(), mat.getNote()
             });
         }
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate localDate = LocalDate.now();
-        txtNgayNhap.setText(dtf.format(localDate)); 
+        setDateDefault();
    }
     public MaterialManager(int idUser) {
         initComponents();
@@ -70,15 +69,13 @@ public class MaterialManager extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtTenNguyenLieu = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
+        btnXuat = new javax.swing.JButton();
         btnRefesh = new javax.swing.JButton();
         txtSoLuong = new javax.swing.JTextField();
-        txtNgayNhap = new javax.swing.JTextField();
         txtGhiChu = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
@@ -99,14 +96,16 @@ public class MaterialManager extends javax.swing.JFrame {
 
         txtSearch.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        tbMaterial.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tbMaterial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã Nguyên Liệu", "Tên", "Số lượng", "Thời gian nhập", "Ghi chú"
+                "Mã Nguyên Liệu", "Tên", "Số lượng", "Ghi chú"
             }
         ));
+        tbMaterial.setRowHeight(24);
         tbMaterial.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbMaterialMouseClicked(evt);
@@ -125,14 +124,11 @@ public class MaterialManager extends javax.swing.JFrame {
         jLabel4.setText("Số lượng");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 150, -1, 27));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setText("Ngày nhập");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 223, -1, 27));
-
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Ghi chú");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 297, -1, 27));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, 27));
 
+        txtTenNguyenLieu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtTenNguyenLieu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTenNguyenLieuActionPerformed(evt);
@@ -147,7 +143,7 @@ public class MaterialManager extends javax.swing.JFrame {
                 btnAddActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 442, 143, 42));
+        jPanel1.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 380, 143, 42));
 
         btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Edit.png"))); // NOI18N
         btnEdit.setText("Sửa");
@@ -156,11 +152,16 @@ public class MaterialManager extends javax.swing.JFrame {
                 btnEditActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(206, 442, 148, 42));
+        jPanel1.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 380, 148, 42));
 
-        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Delete.png"))); // NOI18N
-        btnDelete.setText("Xuất");
-        jPanel1.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 524, 143, 45));
+        btnXuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Delete.png"))); // NOI18N
+        btnXuat.setText("Xuất");
+        btnXuat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXuatActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnXuat, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 143, 45));
 
         btnRefesh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Refresh.png"))); // NOI18N
         btnRefesh.setText("Làm mới");
@@ -169,8 +170,9 @@ public class MaterialManager extends javax.swing.JFrame {
                 btnRefeshActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRefesh, new org.netbeans.lib.awtextra.AbsoluteConstraints(206, 524, 148, 45));
+        jPanel1.add(btnRefesh, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, 148, 45));
 
+        txtSoLuong.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtSoLuong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSoLuongActionPerformed(evt);
@@ -178,19 +180,13 @@ public class MaterialManager extends javax.swing.JFrame {
         });
         jPanel1.add(txtSoLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 145, 214, 40));
 
-        txtNgayNhap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNgayNhapActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtNgayNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 218, 214, 40));
-
+        txtGhiChu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtGhiChu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtGhiChuActionPerformed(evt);
             }
         });
-        jPanel1.add(txtGhiChu, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 292, 214, 41));
+        jPanel1.add(txtGhiChu, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 214, 41));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel2.setText("Quản lý nguyên liệu trong kho");
@@ -200,31 +196,35 @@ public class MaterialManager extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
-                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(30, 30, 30))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(105, 105, 105)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addGap(30, 30, 30))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton1)
-                        .addComponent(txtSearch)))
+                        .addComponent(txtSearch))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
@@ -246,16 +246,37 @@ public class MaterialManager extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTenNguyenLieuActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
+        try {
+            int row = tbMaterial.getSelectedRow();
+            int id= (int) model.getValueAt(row, 0);
+            String tenNL= txtTenNguyenLieu.getText().trim();
+            int soLuong= Integer.parseInt(txtSoLuong.getText().trim());
+            String ghiChu= txtGhiChu.getText().trim();
+            
+            Material mat= new Material(id, tenNL, soLuong, ghiChu);
+            
+            try {
+                MaterialController.updateRecord(mat);
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Lỗi truy vấn", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            materials.remove(row);
+            materials.add(row, mat);
+            
+            model.setValueAt(tenNL, row, 1);
+            model.setValueAt(soLuong, row, 2);
+            model.setValueAt(ghiChu, row, 3);
+            
+            reset();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+        }
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void txtSoLuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoLuongActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSoLuongActionPerformed
-
-    private void txtNgayNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNgayNhapActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNgayNhapActionPerformed
 
     private void txtGhiChuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGhiChuActionPerformed
         // TODO add your handling code here:
@@ -265,10 +286,14 @@ public class MaterialManager extends javax.swing.JFrame {
         try {
             String tenNL= txtTenNguyenLieu.getText().trim();
             int soLuong= Integer.parseInt(txtSoLuong.getText().trim());
-            String ngayNhap= txtNgayNhap.getText().trim();
             String ghiChu= txtGhiChu.getText().trim();
             int id= materials.size()==0? 1: materials.get(materials.size()-1).getIdMat()+1;
             Material mat= new Material(id, tenNL, soLuong, ghiChu);
+            
+            for (int i=0; i<materials.size(); i++){
+                
+            }
+            
             MaterialController.insertRecord(mat);
             materials.add(mat);
             model.addRow(new Object[]{
@@ -288,15 +313,54 @@ public class MaterialManager extends javax.swing.JFrame {
         int row = tbMaterial.getSelectedRow();
         String tenNL=(String) model.getValueAt(row, 1);
         int soLuong=(int) model.getValueAt(row, 2);
-        String ngayNhap=(String) model.getValueAt(row, 3);
-        String ghiChu=(String) model.getValueAt(row, 4);
+        String ghiChu=(String) model.getValueAt(row, 3);
         
         txtTenNguyenLieu.setText(tenNL);
         txtSoLuong.setText(soLuong+"");
-        txtNgayNhap.setText(ngayNhap);
         txtGhiChu.setText(ghiChu);
         
     }//GEN-LAST:event_tbMaterialMouseClicked
+
+    private void btnXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatActionPerformed
+        try {            
+            int row = tbMaterial.getSelectedRow();
+            int id= (int) model.getValueAt(row, 0);
+            String tenNL= txtTenNguyenLieu.getText().trim();
+            int soLuongConLai= Integer.parseInt(txtSoLuong.getText().trim());
+            String ghiChu= txtGhiChu.getText().trim();
+                        
+            soLuongConLai= materials.get(row).getQuantity()- soLuongConLai;
+            
+            if (soLuongConLai<0){
+                throw new Exception("Không đủ số lượng xuất");
+            }
+            
+            if (soLuongConLai==0){
+                model.removeRow(row);
+                try {
+                    MaterialController.deleteRecord(id);
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Lỗi truy vấn", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            
+            Material mat= new Material(id, tenNL, soLuongConLai, ghiChu);
+            
+            try {
+                MaterialController.updateRecord(mat);
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Lỗi truy vấn", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            
+            
+            model.setValueAt(soLuongConLai, row, 2);
+            
+            reset();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnXuatActionPerformed
 
     /**
      * @param args the command line arguments
@@ -338,21 +402,19 @@ public class MaterialManager extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnRefesh;
+    private javax.swing.JButton btnXuat;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tbMaterial;
     private javax.swing.JTextField txtGhiChu;
-    private javax.swing.JTextField txtNgayNhap;
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtSoLuong;
     private javax.swing.JTextField txtTenNguyenLieu;
@@ -362,6 +424,12 @@ public class MaterialManager extends javax.swing.JFrame {
         txtTenNguyenLieu.setText("");
         txtGhiChu.setText("");
         txtSoLuong.setText("");
-        txtNgayNhap.setText("");
+//        setDateDefault();
+    }
+
+    private void setDateDefault() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.now();
+//        txtNgayNhap.setText(dtf.format(localDate)); 
     }
 }

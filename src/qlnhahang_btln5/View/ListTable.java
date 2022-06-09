@@ -6,7 +6,6 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
-import qlnhahang_btln5.Models.DTO.Ordering;
 import qlnhahang_btln5.Models.Tables;
 
 /**
