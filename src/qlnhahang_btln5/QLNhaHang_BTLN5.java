@@ -5,6 +5,8 @@
  */
 package qlnhahang_btln5;
 
+import qlnhahang_btln5.View.Login;
+
 /**
  *
  * @author HaPhong
@@ -15,7 +17,7 @@ public class QLNhaHang_BTLN5 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        new Login().setVisible(true);
     }
     
 }

@@ -178,7 +178,7 @@ public class ChangePassword extends javax.swing.JFrame {
                      AccountController.ResetFileRemember();
                 }
                 if(!checkChangePWHome){
-                    Home h = new Home(acc.getIdEmp());
+                    Home h = new Home(acc.getIdUser());
                     h.setVisible(true);
                     this.dispose();
                     JOptionPane.showMessageDialog(this,"Đổi mật khẩu thành công!");

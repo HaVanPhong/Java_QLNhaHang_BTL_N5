@@ -10,7 +10,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import qlnhahang_btln5.Controller.AccountController;
 import qlnhahang_btln5.Controller.MaterialController;
+import qlnhahang_btln5.Models.Account;
 import qlnhahang_btln5.Models.Material;
 
 /**
@@ -20,9 +22,25 @@ import qlnhahang_btln5.Models.Material;
 public class MaterialManager extends javax.swing.JFrame {
 
     DefaultTableModel model=null;
+    static Account acc = null;
     List<Material> materials;
     public MaterialManager() {
         initComponents();
+        model= (DefaultTableModel) tbMaterial.getModel();
+        materials= MaterialController.readAllRecord();
+        for (Material mat: materials){
+            model.addRow(new Object[]{
+                mat.getIdMat(), mat.getName(), mat.getQuantity(),mat.getNote()
+            });
+        }
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.now();
+        txtNgayNhap.setText(dtf.format(localDate)); 
+   }
+    public MaterialManager(int idUser) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        acc = AccountController.getAccountByIdUser(idUser);
         model= (DefaultTableModel) tbMaterial.getModel();
         materials= MaterialController.readAllRecord();
         for (Material mat: materials){
@@ -67,8 +85,9 @@ public class MaterialManager extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản lý nguyên liệu trong kho");
 
+        btnHome.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Home.png"))); // NOI18N
-        btnHome.setText("Home");
+        btnHome.setText("Trang chủ");
         btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHomeActionPerformed(evt);
@@ -181,23 +200,20 @@ public class MaterialManager extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(105, 105, 105)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
-                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addGap(30, 30, 30))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(30, 30, 30))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 755, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,7 +236,7 @@ public class MaterialManager extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
-        Home home = new Home();
+        Home home = new Home(acc.getIdUser());
         this.dispose();
         home.setVisible(true);
     }//GEN-LAST:event_btnHomeActionPerformed

@@ -27,12 +27,11 @@ public class Home extends javax.swing.JFrame {
 //        this.setLocationRelativeTo(null);
 //        panelSetting.setVisible(checkSetting);
     }
-    public Home(int idEmp){
+    public Home(int idUser){
         initComponents();
         this.setLocationRelativeTo(null);
         panelSetting.setVisible(checkSetting);
-        emp = EmployeeController.GetEmployee(idEmp);
-        acc = AccountController.getAccountByIdEmp(emp.getIdEmp());
+        acc = AccountController.getAccountByIdUser(idUser);
         txtUsername.setText(acc.getUsername());
         if(acc.getRole().equals("User")){
             panelManager.setVisible(false);
@@ -121,6 +120,11 @@ public class Home extends javax.swing.JFrame {
         btnGoiMon.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnGoiMon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Add.png"))); // NOI18N
         btnGoiMon.setText("Gọi món");
+        btnGoiMon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGoiMonActionPerformed(evt);
+            }
+        });
 
         panelManager.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -128,11 +132,21 @@ public class Home extends javax.swing.JFrame {
         btnEmpManager.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Users.png"))); // NOI18N
         btnEmpManager.setText("Quản lý nhân viên");
         btnEmpManager.setPreferredSize(new java.awt.Dimension(250, 50));
+        btnEmpManager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmpManagerActionPerformed(evt);
+            }
+        });
 
         btnAccManager.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnAccManager.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Unknown person.png"))); // NOI18N
         btnAccManager.setText("Quản lý tài khoản");
         btnAccManager.setPreferredSize(new java.awt.Dimension(250, 50));
+        btnAccManager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAccManagerActionPerformed(evt);
+            }
+        });
 
         btnDishManager.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnDishManager.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/monAn.jpg"))); // NOI18N
@@ -143,6 +157,11 @@ public class Home extends javax.swing.JFrame {
         btnTblManager.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/banAn.jpg"))); // NOI18N
         btnTblManager.setText("Quản lý bàn ăn");
         btnTblManager.setPreferredSize(new java.awt.Dimension(250, 50));
+        btnTblManager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTblManagerActionPerformed(evt);
+            }
+        });
 
         btnThuChi.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnThuChi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Price list.png"))); // NOI18N
@@ -168,6 +187,11 @@ public class Home extends javax.swing.JFrame {
         btnMaterialManager.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Open door.png"))); // NOI18N
         btnMaterialManager.setText("Quản lý kho");
         btnMaterialManager.setPreferredSize(new java.awt.Dimension(250, 50));
+        btnMaterialManager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMaterialManagerActionPerformed(evt);
+            }
+        });
 
         btnEqipManager.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnEqipManager.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/doDung.jpg"))); // NOI18N
@@ -330,7 +354,7 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnChangePwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePwActionPerformed
-        new ChangePassword(AccountController.getAccountByIdEmp(emp.getIdEmp()).getIdUser()).setVisible(true);
+        new ChangePassword(acc.getIdUser()).setVisible(true);
     }//GEN-LAST:event_btnChangePwActionPerformed
 
     private void txtUsernameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsernameMouseClicked
@@ -339,11 +363,13 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsernameMouseClicked
 
     private void btnBillManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBillManagerActionPerformed
-        // TODO add your handling code here:
+        new ManagerBill(acc.getIdUser()).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnBillManagerActionPerformed
 
     private void btnThuChiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThuChiActionPerformed
-        // TODO add your handling code here:
+        new ManagerExpense(acc.getIdUser()).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnThuChiActionPerformed
 
     private void btnEqipManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEqipManagerActionPerformed
@@ -354,6 +380,31 @@ public class Home extends javax.swing.JFrame {
         new Login().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLogOutActionPerformed
+
+    private void btnEmpManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpManagerActionPerformed
+        new EmployeeManager(acc.getIdUser()).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnEmpManagerActionPerformed
+
+    private void btnAccManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccManagerActionPerformed
+        new AccountManager(acc.getIdUser()).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAccManagerActionPerformed
+
+    private void btnTblManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTblManagerActionPerformed
+        new TableManager(acc.getIdUser()).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnTblManagerActionPerformed
+
+    private void btnMaterialManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaterialManagerActionPerformed
+         new MaterialManager(acc.getIdUser()).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMaterialManagerActionPerformed
+
+    private void btnGoiMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoiMonActionPerformed
+        new OrderManager(acc.getIdUser()).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnGoiMonActionPerformed
 
     /**
      * @param args the command line arguments

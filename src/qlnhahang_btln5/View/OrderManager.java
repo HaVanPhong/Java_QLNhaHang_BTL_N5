@@ -14,10 +14,12 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import qlnhahang_btln5.Controller.AccountController;
 import qlnhahang_btln5.Controller.BillController;
 import qlnhahang_btln5.Controller.CustomerController;
 import qlnhahang_btln5.Controller.DishController;
 import qlnhahang_btln5.Controller.TableController;
+import qlnhahang_btln5.Models.Account;
 import qlnhahang_btln5.Models.BillDetail;
 import qlnhahang_btln5.Models.Customer;
 import qlnhahang_btln5.Models.DTO.DishOrder;
@@ -39,6 +41,7 @@ public class OrderManager extends javax.swing.JFrame {
     DefaultTableModel modelThucDon=null;
     DefaultTableModel modelMonDaGoi= null;
     public static List<Ordering> listOrderingOfTable= new ArrayList<>();
+    static Account acc = null;
 
     public static List<Ordering> getListOrderingOfTable() {
         return listOrderingOfTable;
@@ -51,8 +54,10 @@ public class OrderManager extends javax.swing.JFrame {
     
     
     public static int currentTableNumber=1;
-    public OrderManager() {
+    public OrderManager(int idUser) {
         initComponents();
+        this.setLocationRelativeTo(null);
+        acc = AccountController.getAccountByIdUser(idUser);
         edtIdDish.setVisible(false);
         listTable.setLayoutOrientation(JList.VERTICAL_WRAP);
         listTable.setVisibleRowCount(3);
@@ -154,6 +159,7 @@ public class OrderManager extends javax.swing.JFrame {
         spnSoLuong = new javax.swing.JSpinner();
         jLab = new javax.swing.JLabel();
         edtIdDish = new javax.swing.JTextField();
+        btnComeback = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gọi món");
@@ -295,6 +301,14 @@ public class OrderManager extends javax.swing.JFrame {
         edtIdDish.setEditable(false);
         edtIdDish.setForeground(new java.awt.Color(255, 255, 255));
 
+        btnComeback.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Exit.png"))); // NOI18N
+        btnComeback.setText("Quay lại");
+        btnComeback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComebackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -388,11 +402,15 @@ public class OrderManager extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lbDaGoi, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(280, 280, 280))))))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(btnComeback, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addComponent(btnComeback, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbCurrentTable)
                     .addComponent(lbCurrentStt))
@@ -436,13 +454,13 @@ public class OrderManager extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGoiMon, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
                         .addComponent(edtIdDish, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -551,6 +569,12 @@ public class OrderManager extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
+    private void btnComebackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComebackActionPerformed
+        Home h = new Home(acc.getIdUser());
+        this.dispose();
+        h.setVisible(true);
+    }//GEN-LAST:event_btnComebackActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -582,12 +606,13 @@ public class OrderManager extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new OrderManager().setVisible(true);
+                //new OrderManager().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnComeback;
     private javax.swing.JButton btnGoiMon;
     private javax.swing.JButton btnThanhToan;
     private javax.swing.JTextField edtGiaBan;

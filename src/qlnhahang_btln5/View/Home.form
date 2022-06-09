@@ -194,6 +194,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="G&#x1ecd;i m&#xf3;n"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGoiMonActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="panelManager">
           <Properties>
@@ -264,6 +267,9 @@
                   <Dimension value="[250, 50]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEmpManagerActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnAccManager">
               <Properties>
@@ -278,6 +284,9 @@
                   <Dimension value="[250, 50]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAccManagerActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnDishManager">
               <Properties>
@@ -306,6 +315,9 @@
                   <Dimension value="[250, 50]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTblManagerActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnThuChi">
               <Properties>
@@ -354,6 +366,9 @@
                   <Dimension value="[250, 50]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMaterialManagerActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnEqipManager">
               <Properties>
