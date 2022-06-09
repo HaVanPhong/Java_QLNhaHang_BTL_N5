@@ -19,7 +19,10 @@ import qlnhahang_btln5.Models.Tables;
  */
 public class EquipmentController {
     public static int insertRecord(Equipment equip) {
-        String sqlInsert = "insert into Equipment values (N'"+equip.getName()+"', "+equip.getQuantity()+", N'"+equip.getNote()+"')";
+        String sqlInsert = "insert into Equipment values (N'"
+                            +equip.getName()
+                            +"', "+equip.getQuantity()
+                            +", N'"+equip.getNote()+"')";
         try {
             return statement.executeUpdate(sqlInsert);
         } catch (SQLException e) {
@@ -79,7 +82,10 @@ public class EquipmentController {
     }
     public static int updateRecord(Equipment equip) {
         String sqlUpdate =
-                "update Equipment set name =N'"+equip.getName()+ "', quantity="+equip.getQuantity()+", note=N'"+equip.getNote()+"' where idEquip ="+equip.getIdEquip()+"";
+                "update Equipment set name =N'"+equip.getName()
+                + "', quantity="+equip.getQuantity()
+                +", note=N'"+equip.getNote()
+                +"' where idEquip ="+equip.getIdEquip()+"";
         try {
             return statement.executeUpdate(sqlUpdate);
         } catch (SQLException e) {
