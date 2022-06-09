@@ -64,6 +64,7 @@ public class DishManager extends javax.swing.JFrame {
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -178,12 +179,12 @@ public class DishManager extends javax.swing.JFrame {
             }
         ));
         tbQLDish.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 tbQLDishAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         tbQLDish.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -204,12 +205,15 @@ public class DishManager extends javax.swing.JFrame {
         });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Home.png"))); // NOI18N
-        jButton2.setText("Home");
+        jButton2.setText("Trang chủ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setText("Quản lý món ăn");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -225,6 +229,8 @@ public class DishManager extends javax.swing.JFrame {
                         .addGap(17, 17, 17))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(174, 174, 174)
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -239,7 +245,9 @@ public class DishManager extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnSearch)
                         .addComponent(txtSearch))
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -269,56 +277,76 @@ public class DishManager extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         try {
 
-            int ID = Integer.parseInt(txtID.getText());
+            
             String name = txtName.getText();
             Double price = Double.parseDouble(txtPrice.getText());
-            Dish dish = new Dish( ID,name, price);
+            if("".equals(name) || "".equals(price)){
+                throw new Exception("tên món ăn hoặc giá bán không được để trống");
+            }
+            Dish dish = new Dish(name, price);
             if(DishController.store(dish)){
-                System.out.println("Thêm thành công!");
+                JOptionPane.showMessageDialog(rootPane, "Thêm thành công");
+                clearForm();
+                showTable();
             }else{
-                System.out.println("Thêm thất bại!!");
+                JOptionPane.showMessageDialog(rootPane, "Thêm thất bại");
             }
 
         } catch (Exception e) {
-            System.out.println("Vui lòng nhập đầy đủ");
+            JOptionPane.showMessageDialog(rootPane, "tên món ăn hoặc giá bán không được để trống",
+                                           "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         try {
             int row = tbQLDish.getSelectedRow();
-            if(row>=0){
+            if(row == -1){
+                JOptionPane.showMessageDialog(rootPane, "bạn chưa chọn món ăn nào để chỉnh sửa",
+                                                     "thông báo lỗi", JOptionPane.ERROR_MESSAGE);
+            } else{
                 int id = Integer.parseInt(model.getValueAt(row,1).toString());
                 System.out.println("id : "+id);
-                int ID = Integer.parseInt(txtID.getText());
                 String name = txtName.getText();
                 Double price = Double.parseDouble(txtPrice.getText());
-                Dish dish = new Dish(id,name, price);
+                if("".equals(name) || String.valueOf(price).equals("")){
+                     throw new Exception("tên món ăn hoặc giá bán không được để trống");
+                }
+                    Dish dish = new Dish(id,name, price);
                 if(DishController.update(dish)){
                     JOptionPane.showMessageDialog(rootPane, "Update thành công");
+                    clearForm();
+                    showTable();
                 }else{
                     JOptionPane.showMessageDialog(rootPane, "Update thất bại");
                 }
+                
             }
 
         } catch (Exception e) {
-            System.out.println("Lỗi update");
+            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Thông báo", JOptionPane.OK_OPTION);
         }
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int row = tbQLDish.getSelectedRow();
-        if(row >= 0){
-            if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn xóa?","Admin",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+        if(row == -1){
+            JOptionPane.showMessageDialog(rootPane, "bạn chưa chọn món ăn nào để xóa",
+                                         "thông báo lỗi", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn xóa?",
+                        "Admin",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                 int id = Integer.parseInt(model.getValueAt(row,1).toString());
                 DishController.delete(id);
                 clearForm();
+                showTable();
             }
         }
+
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnRefeshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefeshActionPerformed
-
+        clearForm();
         showTable();
     }//GEN-LAST:event_btnRefeshActionPerformed
 
@@ -336,7 +364,6 @@ public class DishManager extends javax.swing.JFrame {
 
     private void tbQLDishMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbQLDishMouseClicked
         int row = tbQLDish.getSelectedRow();
-        txtID.setText(model.getValueAt(row,1).toString());
         txtName.setText(model.getValueAt(row,2).toString());
         txtPrice.setText(model.getValueAt(row,3).toString());
 
@@ -344,7 +371,11 @@ public class DishManager extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 
-        list = DishController.search(txtSearch.getText());
+        try{
+           list = DishController.search(txtSearch.getText());
+        if(list.isEmpty()){
+           throw new Exception("Không tìm thấy món ăn hợp lệ!");
+        }
         System.out.println(list.size());
         model.setRowCount(0);
         int stt = 1 ;
@@ -352,6 +383,10 @@ public class DishManager extends javax.swing.JFrame {
             model.addRow(new Object[]{
                 stt++,dish.getIdDish(),dish.getName(),dish.getPrice()
             });
+        }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(rootPane, e.getMessage(),
+                                 "Thông báo", JOptionPane.OK_OPTION);
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
@@ -362,8 +397,8 @@ public class DishManager extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public  void clearForm(){
-        txtID.requestFocus();
         txtName.setText("");
+        txtName.requestFocus();
         txtPrice.setText("");
     }
 
@@ -409,6 +444,7 @@ public class DishManager extends javax.swing.JFrame {
     private javax.swing.JButton btnRefesh;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;

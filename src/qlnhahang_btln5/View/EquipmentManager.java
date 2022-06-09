@@ -66,6 +66,7 @@ public class EquipmentManager extends javax.swing.JFrame {
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         btnHome = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,7 +77,7 @@ public class EquipmentManager extends javax.swing.JFrame {
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Tên: ");
+        jLabel1.setText("Tên thiết bị: ");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Số lượng:");
@@ -143,7 +144,7 @@ public class EquipmentManager extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                         .addComponent(btnRefesh, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,12 +200,12 @@ public class EquipmentManager extends javax.swing.JFrame {
             }
         ));
         tbQLEquip.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 tbQLEquipAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         tbQLEquip.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -233,6 +234,9 @@ public class EquipmentManager extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setText("Quản trị Trang thiết bị");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -243,10 +247,12 @@ public class EquipmentManager extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
                         .addGap(17, 17, 17))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(83, 83, 83)
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -261,7 +267,9 @@ public class EquipmentManager extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnSearch)
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnHome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -297,13 +305,22 @@ public class EquipmentManager extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 
-        list = EquipmentController.search(txtSearch.getText());
+        try{
+           list = EquipmentController.search(txtSearch.getText());
+        if(list.isEmpty()){
+           throw new Exception("Không tìm thấy thiết bị hợp lệ!");
+        }
         model.setRowCount(0);
         int stt = 1 ;
         for (Equipment equip : list) {
             model.addRow(new Object[]{
-                stt++,equip.getIdEquip(),equip.getName(),equip.getQuantity(), equip.getNote()
+                stt++,equip.getIdEquip(),equip.getName(),
+                      equip.getQuantity(), equip.getNote()
             });
+        }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(rootPane, e.getMessage(),
+                                "Thông báo", JOptionPane.OK_OPTION);
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
@@ -322,14 +339,19 @@ public class EquipmentManager extends javax.swing.JFrame {
     }//GEN-LAST:event_txtQuantityActionPerformed
 
     private void btnRefeshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefeshActionPerformed
-
+        clearForm();
         showTable();
     }//GEN-LAST:event_btnRefeshActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int row = tbQLEquip.getSelectedRow();
-        if(row >= 0){
-            if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn xóa ?","Admin",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+        if(row == -1){
+           JOptionPane.showMessageDialog(rootPane, "bạn chưa chọn thiết bị nào để xóa",
+                                       "thông báo lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            if(JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn xóa ?",
+                       "Admin",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                 int idEquip = Integer.parseInt(model.getValueAt(row,1).toString());
                 EquipmentController.deleteRecord(idEquip);
                 clearForm();
@@ -341,12 +363,19 @@ public class EquipmentManager extends javax.swing.JFrame {
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         try {
             int row = tbQLEquip.getSelectedRow();
-            if(row>=0){
+            if(row  == -1){
+               JOptionPane.showMessageDialog(rootPane, "bạn chưa chọn thiết bị nào để chỉnh sửa",
+                                                     "thông báo lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
                 int idEquip = Integer.parseInt(model.getValueAt(row,1).toString());
                 System.out.println("idEquip : "+idEquip);
                 String name = txtName.getText();
                 int quantity = Integer.parseInt(txtQuantity.getText());
                 String note = txtNote.getText();
+                if("".equals(name) || String.valueOf(quantity).equals("")){
+                      throw new Exception("tên, số lượng không được để trống");
+                }
                 Equipment equipment = new Equipment(idEquip, name, quantity, note);
                 if(EquipmentController.updateRecord(equipment) == 1){
                     JOptionPane.showMessageDialog(rootPane, "Update thành công");
@@ -358,7 +387,8 @@ public class EquipmentManager extends javax.swing.JFrame {
             }
 
         } catch (Exception e) {
-            System.out.println("Lỗi update");
+            JOptionPane.showMessageDialog(rootPane,"tên, số lượng không được để trống",
+                                                 "Thông báo", JOptionPane.OK_OPTION);
         }
     }//GEN-LAST:event_btnEditActionPerformed
 
@@ -368,18 +398,23 @@ public class EquipmentManager extends javax.swing.JFrame {
             String name = txtName.getText();
             int quantity = Integer.parseInt(txtQuantity.getText());
             String note = txtNote.getText();
+            if("".equals(name) || "".equals(quantity)){
+                throw new Exception("tên, số lượng không được để trống ");
+            }else {
             Equipment equip = new Equipment(name, quantity, note);
             if(EquipmentController.insertRecord(equip) == 1){
-                System.out.println("Thêm thành công!");
+                JOptionPane.showMessageDialog(rootPane, "Thêm thành công");
                 clearForm();
                 showTable();
             }else{
-                System.out.println("Thêm thất bại!!");
+                JOptionPane.showMessageDialog(rootPane, "Thêm thất bại");
+            }
             }
 
 
         } catch (Exception e) {
-            System.out.println("Vui lòng nhập đầy đủ");
+            JOptionPane.showMessageDialog(rootPane,"tên, số lượng không được để trống",
+                                         "Thông báo lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -435,6 +470,7 @@ public class EquipmentManager extends javax.swing.JFrame {
     private javax.swing.JButton btnRefesh;
     private javax.swing.JButton btnSearch;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
