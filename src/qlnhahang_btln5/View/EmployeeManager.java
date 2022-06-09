@@ -13,8 +13,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import qlnhahang_btln5.Controller.AccountController;
 import qlnhahang_btln5.Controller.EmployeeController;
+import qlnhahang_btln5.Models.Account;
 import qlnhahang_btln5.Models.Employee;
+import static qlnhahang_btln5.View.Home.emp;
 
 /**
  *
@@ -26,16 +29,28 @@ public class EmployeeManager extends javax.swing.JFrame {
     Date d = new Date();
     String [] Tile = {"STT","ID","Họ tên","SDT","Ngày sinh","Giới tính","Lương","Địa chỉ","Vị trí"};
     static ArrayList<Employee> listEmp = new ArrayList<>();
+    static Account acc = null;
     
     /**
      * Creates new form ManagerEmployee
      */
     public EmployeeManager() {
         initComponents();
+        this.setLocationRelativeTo(null);
         model =  (DefaultTableModel) tbQlEmp.getModel();
         model.setColumnIdentifiers(Tile);
         txtBirthday.setDate(d);
         ShowTable();
+    }
+    public EmployeeManager(int idUser) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        acc = AccountController.getAccountByIdUser(idUser);
+        model =  (DefaultTableModel) tbQlEmp.getModel();
+        model.setColumnIdentifiers(Tile);
+        txtBirthday.setDate(d);
+        ShowTable();
+        //System.out.println(acc.getIdUser());
     }
     public void  ShowTable(){
         listEmp = EmployeeController.GetAllEmployee();
@@ -416,7 +431,9 @@ public class EmployeeManager extends javax.swing.JFrame {
                     }
                 }
                 
-        }
+        }else{
+                JOptionPane.showMessageDialog(null, "Bạn chưa chọn bản ghi nào", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            }
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Lỗi trong quá trình sửa!");
@@ -424,7 +441,8 @@ public class EmployeeManager extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
-        Home home = new Home();
+        System.out.println(acc.getIdUser());
+        Home home = new Home(acc.getIdUser());
         this.dispose();
         home.setVisible(true);
     }//GEN-LAST:event_btnHomeActionPerformed
@@ -520,6 +538,8 @@ public class EmployeeManager extends javax.swing.JFrame {
                 ClearForm();
                 ShowTable();
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Bạn chưa chọn bản ghi nào", "Thông báo", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -620,10 +640,7 @@ public class EmployeeManager extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdoMale;
     private javax.swing.JTable tbQlEmp;
     private javax.swing.JTextArea txtAddress;
-<<<<<<< HEAD
-=======
     private com.toedter.calendar.JDateChooser txtBirthday;
->>>>>>> 8dd9023 (fix-conflict)
     private javax.swing.JTextField txtPhone;
     private javax.swing.JTextField txtSalary;
     private javax.swing.JTextField txtSearch;

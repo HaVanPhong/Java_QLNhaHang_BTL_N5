@@ -8,8 +8,12 @@ package qlnhahang_btln5.View;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import qlnhahang_btln5.Controller.AccountController;
 import qlnhahang_btln5.Controller.TableController;
+import qlnhahang_btln5.Models.Account;
 import qlnhahang_btln5.Models.Tables;
+import static qlnhahang_btln5.View.AccountManager.acc;
+import static qlnhahang_btln5.View.EmployeeManager.acc;
 
 /**
  *
@@ -22,8 +26,22 @@ public class TableManager extends javax.swing.JFrame {
      */
     DefaultTableModel model=null;
     public static List<Tables> tables;
+    static Account acc = null;
+    
     public TableManager() {
         initComponents();
+        model= (DefaultTableModel) tbBanAn.getModel();
+        tables= TableController.readAllTables();
+        tables.forEach((tb) -> {
+            model.addRow(new Object[]{
+                tb.getIdTB(), tb.getTbNumber(), tb.getGhiChu()
+            });
+        });
+    }
+    public TableManager(int idUser) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        acc = AccountController.getAccountByIdUser(idUser);
         model= (DefaultTableModel) tbBanAn.getModel();
         tables= TableController.readAllTables();
         tables.forEach((tb) -> {
@@ -61,8 +79,9 @@ public class TableManager extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản lý bàn ăn");
 
+        btnHome.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/qlnhahang_btln5/images/Home.png"))); // NOI18N
-        btnHome.setText("Home");
+        btnHome.setText("Trang chủ");
         btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHomeActionPerformed(evt);
@@ -203,8 +222,8 @@ public class TableManager extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(240, 240, 240)
+                        .addComponent(btnHome, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(211, 211, 211)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -237,7 +256,7 @@ public class TableManager extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
-        Home home = new Home();
+        Home home = new Home(acc.getIdUser());
         this.dispose();
         home.setVisible(true);
     }//GEN-LAST:event_btnHomeActionPerformed

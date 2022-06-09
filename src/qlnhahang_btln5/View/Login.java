@@ -215,7 +215,7 @@ public class Login extends javax.swing.JFrame {
                     new ChangePassword(AccountController.CheckLogin(username, hash).getIdUser(),cbRememberPW.isSelected()).setVisible(true);
                     this.dispose();
                 }else{
-                    Home h = new Home(AccountController.CheckLogin(username, hash).getIdEmp());
+                    Home h = new Home(AccountController.CheckLogin(username, hash).getIdUser());
                     h.setVisible(true);
                     this.dispose();
                     JOptionPane.showMessageDialog(this,"Đăng nhập thành công!");
