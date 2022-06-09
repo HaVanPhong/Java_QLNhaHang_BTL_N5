@@ -21,6 +21,11 @@ public class Equipment{
         this.quantity = quantity;
         this.note = note;
     }
+    public Equipment( String name, int quantity, String note) {
+        this.name = name;
+        this.quantity = quantity;
+        this.note = note;
+    }
 
     public Equipment() {
     }

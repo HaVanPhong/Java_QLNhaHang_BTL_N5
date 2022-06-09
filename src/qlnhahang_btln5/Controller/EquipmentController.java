@@ -87,4 +87,25 @@ public class EquipmentController {
             return -1;
         }
     }
+    public static List<Equipment> search(String str){
+        List<Equipment> list = new ArrayList<>();
+        System.out.println("str:" +str );
+        String sql = "select * from Equipment where name like N'%"+str+"%'";
+        try{
+            ResultSet rs = statement.executeQuery(sql);
+            while(rs.next()){
+                Equipment equip = new Equipment(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getString(4)
+                );
+                list.add(equip);
+
+            }
+        }catch (SQLException ex){
+            System.out.println(ex.toString());
+        }
+        return list;
+    }
 }
