@@ -37,8 +37,8 @@ public class MaterialController {
                 Material mat = new Material(
                         resultSet.getInt(1),
                         resultSet.getString(2),
-                        resultSet.getFloat(3),
-                        resultSet.getString(4)                        
+                        resultSet.getInt(3),
+                        resultSet.getString(4)
                 );
 
                 mats.add(mat);
@@ -58,7 +58,7 @@ public class MaterialController {
                 mat = new Material(
                     resultSet.getInt(1),
                     resultSet.getString(2),
-                    resultSet.getFloat(3),
+                    resultSet.getInt(3),
                     resultSet.getString(4)                        
                 );
             }
@@ -68,23 +68,14 @@ public class MaterialController {
         return mat;
     }
     
-    public static int deleteRecord(int idMat) {
+    public static int deleteRecord(int idMat) throws SQLException {
         String sqlDelete = "delete from Material where idMat = "+idMat+"";
-        try {
-            return statement.executeUpdate(sqlDelete);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return -1;
-        }
+        return statement.executeUpdate(sqlDelete);
     }
-    public static int updateRecord(Material mat) {
+    public static int updateRecord(Material mat) throws SQLException {
         String sqlUpdate =
                 "update Material set name =N'"+mat.getName()+ "', quantity="+mat.getQuantity()+", note=N'"+mat.getNote()+"' where idMat ="+mat.getIdMat()+"";
-        try {
-            return statement.executeUpdate(sqlUpdate);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return -1;
-        }
+        return statement.executeUpdate(sqlUpdate);
+       
     }
 }

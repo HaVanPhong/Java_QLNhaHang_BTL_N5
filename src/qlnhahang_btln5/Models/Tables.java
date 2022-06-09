@@ -13,6 +13,7 @@ public class Tables {
     private int idTB;
     private int tbNumber;
     private String ghiChu;
+    
     public Tables(int idTB, int tbNumber, String ghiChu) {
         this.idTB = idTB;
         this.tbNumber = tbNumber;

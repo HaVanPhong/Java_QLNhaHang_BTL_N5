@@ -5,6 +5,7 @@
  */
 package qlnhahang_btln5.View;
 
+import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -31,7 +32,11 @@ public class TableManager extends javax.swing.JFrame {
     public TableManager() {
         initComponents();
         model= (DefaultTableModel) tbBanAn.getModel();
-        tables= TableController.readAllTables();
+        try {
+            tables= TableController.readAllTables();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(rootPane, "Không thể truy vấn dữ liệu bàn ăn", "Lỗi truy vấn", JOptionPane.ERROR_MESSAGE);
+        }
         tables.forEach((tb) -> {
             model.addRow(new Object[]{
                 tb.getIdTB(), tb.getTbNumber(), tb.getGhiChu()
@@ -105,6 +110,7 @@ public class TableManager extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Ghi chú");
 
+        txtSoBan.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtSoBan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSoBanActionPerformed(evt);
@@ -143,6 +149,7 @@ public class TableManager extends javax.swing.JFrame {
             }
         });
 
+        txtGhiChu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtGhiChu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtGhiChuActionPerformed(evt);
@@ -196,6 +203,7 @@ public class TableManager extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        tbBanAn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tbBanAn.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -204,6 +212,7 @@ public class TableManager extends javax.swing.JFrame {
                 "Mã Bàn Ăn", "Số bàn", "Ghi chú"
             }
         ));
+        tbBanAn.setRowHeight(24);
         tbBanAn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbBanAnMouseClicked(evt);
@@ -271,12 +280,14 @@ public class TableManager extends javax.swing.JFrame {
             
             String ghiChu= txtGhiChu.getText().trim();
             int row= tbBanAn.getSelectedRow();
+            
             tables.get(row).setTbNumber(soBan);
+            
             tables.get(row).setGhiChu(ghiChu);
             TableController.updateRecord(tables.get(row));
             tbBanAn.setValueAt(tables.get(row).getTbNumber(), row, 1);
             tbBanAn.setValueAt(tables.get(row).getGhiChu(), row, 2);
-        } catch (Exception e) {
+        } catch (NumberFormatException | SQLException e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
         }
     }//GEN-LAST:event_btnEditActionPerformed
@@ -290,10 +301,14 @@ public class TableManager extends javax.swing.JFrame {
             int soBan= Integer.parseInt(txtSoBan.getText().trim());
             int row= tbBanAn.getSelectedRow();
             model.removeRow(row);
+            
             tables.remove(row);
+            
             TableController.deleteRecord(soBan);
             txtSoBan.setText("");
             txtGhiChu.setText("");
+        }catch (SQLException ex){
+            JOptionPane.showMessageDialog(rootPane, "Lỗi SQL: Không thể xóa bàn ăn", "Lỗi xóa bàn ăn", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
         }
@@ -312,11 +327,14 @@ public class TableManager extends javax.swing.JFrame {
             model.addRow(new Object[]{
                 table.getIdTB(), table.getTbNumber(), table.getGhiChu()
             });
+            
+            tables.add(table);
+            
             TableController.insertRecord(table);
             txtSoBan.setText("");
             txtGhiChu.setText("");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, "Lỗi:  "+ e.getMessage());
+            JOptionPane.showMessageDialog(rootPane, "Lỗi:  "+ e.getMessage(), "Lỗi thêm bàn ăn", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnAddTableActionPerformed
 
